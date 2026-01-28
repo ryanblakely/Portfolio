@@ -1,0 +1,37 @@
+.container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--page-padding);
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: var(--space-10);
+}
+
+.main {
+  max-width: 800px;
+}
+
+.heading {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-10) 0;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-6);
+  }
+
+  .grid {
+    gap: var(--space-8);
+  }
+}

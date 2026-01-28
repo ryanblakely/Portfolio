@@ -1,0 +1,46 @@
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: var(--color-background-preview);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.link:hover .image {
+  transform: scale(1.02);
+}
+
+.content {
+  margin-top: var(--space-3);
+}
+
+.name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: var(--space-1) 0 0 0;
+  line-height: var(--line-height-normal);
+}

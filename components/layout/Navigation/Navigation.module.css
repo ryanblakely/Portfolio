@@ -1,0 +1,25 @@
+.nav {
+  margin-top: var(--space-4);
+}
+
+.list {
+  display: flex;
+  gap: var(--space-6);
+  list-style: none;
+}
+
+.link {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--color-text-primary);
+}
+
+.link[aria-current='page'] {
+  color: var(--color-text-primary);
+}

@@ -1,0 +1,10 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--transition-fast);
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
