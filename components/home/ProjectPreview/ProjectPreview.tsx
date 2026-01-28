@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import type { Project } from '@/types';
 import styles from './ProjectPreview.module.css';
@@ -7,22 +8,69 @@ interface ProjectPreviewProps {
 }
 
 export function ProjectPreview({ project }: ProjectPreviewProps) {
-  if (!project) {
-    return null;
-  }
+  const [displayedProject, setDisplayedProject] = useState<Project | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const lastChangeRef = useRef<number>(0);
+  const prevProjectRef = useRef<Project | null>(null);
+
+  useEffect(() => {
+    const now = Date.now();
+    const timeSinceLastChange = now - lastChangeRef.current;
+    const isQuickSwitch = timeSinceLastChange < 600 && prevProjectRef.current !== null;
+
+    if (project) {
+      if (isQuickSwitch && project.id !== prevProjectRef.current?.id) {
+        // Quick switch: immediately hide, then show new
+        setIsVisible(false);
+        setDisplayedProject(null);
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setDisplayedProject(project);
+            setIsVisible(true);
+          });
+        });
+      } else if (project.id !== displayedProject?.id) {
+        // New project or slow switch: fade in
+        setIsVisible(false);
+        const timeout = setTimeout(() => {
+          setDisplayedProject(project);
+          setIsVisible(true);
+        }, displayedProject ? 100 : 0);
+        return () => clearTimeout(timeout);
+      } else {
+        setIsVisible(true);
+      }
+      lastChangeRef.current = now;
+      prevProjectRef.current = project;
+    } else {
+      setIsVisible(false);
+      // Keep the project rendered during fade out
+      const timeout = setTimeout(() => {
+        setDisplayedProject(null);
+        prevProjectRef.current = null;
+      }, 500); // Match the CSS transition duration
+      return () => clearTimeout(timeout);
+    }
+  }, [project]);
 
   return (
-    <div className={styles.preview} aria-live="polite" aria-atomic="true">
-      <div className={styles.imageContainer}>
-        <Image
-          src={project.previewImage || project.heroImage}
-          alt={`Preview of ${project.name}`}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          priority
-          className={styles.image}
-        />
-      </div>
+    <div
+      className={`${styles.preview} ${isVisible ? styles.visible : ''}`}
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      {displayedProject && (
+        <div className={styles.imageContainer}>
+          <Image
+            src={displayedProject.previewImage || displayedProject.heroImage}
+            alt={`Preview of ${displayedProject.name}`}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+            className={styles.image}
+          />
+        </div>
+      )}
     </div>
   );
 }

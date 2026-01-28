@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { Logo } from '@/components/layout/Logo';
 import { Navigation } from '@/components/layout/Navigation';
@@ -13,6 +13,26 @@ import styles from './page.module.css';
 
 export default function HomePage() {
   const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
+  const [persistedProject, setPersistedProject] = useState<Project | null>(null);
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const displayProject = hoveredProject || persistedProject;
+
+  const handleMouseEnter = (project: Project) => {
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+    setHoveredProject(project);
+    setPersistedProject(project);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredProject(null);
+    hideTimeoutRef.current = setTimeout(() => {
+      setPersistedProject(null);
+    }, 600);
+  };
 
   return (
     <div className={styles.container}>
@@ -40,8 +60,8 @@ export default function HomePage() {
                           <Link
                             href={`/${project.category}/${project.id}`}
                             className={styles.projectLink}
-                            onMouseEnter={() => setHoveredProject(project)}
-                            onMouseLeave={() => setHoveredProject(null)}
+                            onMouseEnter={() => handleMouseEnter(project)}
+                            onMouseLeave={handleMouseLeave}
                           >
                             {project.name}
                           </Link>
@@ -56,7 +76,7 @@ export default function HomePage() {
           </nav>
         </aside>
         <main id="main" className={styles.content}>
-          <ProjectPreview project={hoveredProject} />
+          <ProjectPreview project={displayProject} />
         </main>
       </div>
     </div>
