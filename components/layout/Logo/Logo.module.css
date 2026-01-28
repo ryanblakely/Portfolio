@@ -8,3 +8,8 @@
 .logo:hover {
   opacity: 0.8;
 }
+
+.image {
+  border-radius: 50%;
+  object-fit: cover;
+}

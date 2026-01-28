@@ -24,13 +24,15 @@
   font-size: var(--font-size-base);
   line-height: var(--line-height-relaxed);
   color: var(--color-text-primary);
-  margin: 0 0 var(--space-6) 0;
+  margin: 0 0 var(--space-8) 0;
 }
 
-.quote {
-  font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
-  margin: 0;
+.imageContainer {
+  margin-top: var(--space-4);
+}
+
+.image {
+  border-radius: 8px;
 }
 
 @media (max-width: 768px) {
