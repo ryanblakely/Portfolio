@@ -6,7 +6,7 @@ export function Logo() {
   return (
     <Link href="/" className={styles.logo} aria-label="Home">
       <Image
-        src="/avatar.jpg"
+        src="/avatar3.jpg"
         alt="Ryan Blakely"
         width={36}
         height={36}

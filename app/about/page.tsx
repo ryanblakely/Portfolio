@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Logo } from '@/components/layout/Logo';
 import { siteConfig } from '@/data/site';
 import styles from './page.module.css';
@@ -28,6 +29,9 @@ export default function AboutPage() {
             className={styles.image}
           />
         </div>
+        <Link href="/connect" className={styles.connectLink}>
+          Connect
+        </Link>
       </main>
     </div>
   );
