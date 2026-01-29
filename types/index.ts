@@ -29,3 +29,16 @@ export interface Project {
   githubUrl?: string;
   downloadUrl?: string;
 }
+
+export type PostContentBlock =
+  | { type: 'text'; content: string }
+  | { type: 'image'; src: string; alt: string; caption?: string }
+  | { type: 'code'; content: string; language?: string };
+
+export interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  content: PostContentBlock[];
+}
