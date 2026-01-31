@@ -31,7 +31,7 @@ export const projects: Project[] = [
   // iOS apps
   {
     id: 'one-word',
-    name: 'One Word',
+    name: 'Speed Reader',
     platform: 'ios',
     category: 'ios-apps',
     description: 'Read ebooks, pdfs, urls, and text using Rapid Serial Visual Presentation',
@@ -56,6 +56,18 @@ export const projects: Project[] = [
 
   // Mac apps
   {
+    id: 'one-word-mac',
+    name: 'Speed Reader',
+    platform: 'macos',
+    category: 'mac-apps',
+    description: 'Speed read using Rapid Serial Visual Presentation',
+    tech: ['Swift', 'SwiftUI'],
+    year: 2025,
+    status: 'active',
+    heroImage: '/projects/one-word-mac/hero.svg',
+    previewVideo: '/projects/one-word-mac/preview.mp4',
+  },
+  {
     id: 'bitcoin-price',
     name: 'Bitcoin Price',
     platform: 'macos',
@@ -78,30 +90,6 @@ export const projects: Project[] = [
     status: 'active',
     heroImage: '/projects/pomo/hero.svg',
     previewVideo: '/projects/pomo/preview.mp4',
-  },
-  {
-    id: 'to-do',
-    name: 'To Do',
-    platform: 'macos',
-    category: 'mac-apps',
-    description: 'Quick tasks from menu bar',
-    tech: ['Swift', 'SwiftUI', 'SwiftData'],
-    year: 2024,
-    status: 'active',
-    heroImage: '/projects/to-do/hero.svg',
-    previewVideo: '/projects/to-do/preview.mp4',
-  },
-  {
-    id: 'one-word-mac',
-    name: 'One Word',
-    platform: 'macos',
-    category: 'mac-apps',
-    description: 'Speed read using Rapid Serial Visual Presentation',
-    tech: ['Swift', 'SwiftUI'],
-    year: 2025,
-    status: 'active',
-    heroImage: '/projects/one-word-mac/hero.svg',
-    previewVideo: '/projects/one-word-mac/preview.mp4',
   },
 
   // VisionOS apps
