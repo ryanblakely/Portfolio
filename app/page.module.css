@@ -30,6 +30,7 @@
 .main {
   display: flex;
   gap: var(--space-8);
+  align-items: flex-start;
 }
 
 .sidebar {
