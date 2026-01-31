@@ -3,8 +3,9 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Logo } from '@/components/layout/Logo';
 import { CodeBlock } from '@/components/posts/CodeBlock';
-import { getAllPosts, getPostBySlug } from '@/lib/posts';
+import { getAllSlugs, getPostBySlug } from '@/lib/posts';
 import type { PostContentBlock } from '@/types';
+import { isMarkdownPost, isBlockPost } from '@/types';
 import styles from './page.module.css';
 
 interface PostPageProps {
@@ -12,15 +13,15 @@ interface PostPageProps {
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
+  const slugs = getAllSlugs();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return {
@@ -70,7 +71,7 @@ function renderContentBlock(block: PostContentBlock, index: number) {
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -93,7 +94,13 @@ export default async function PostPage({ params }: PostPageProps) {
             })}
           </time>
           <div className={styles.content}>
-            {post.content.map((block, index) => renderContentBlock(block, index))}
+            {isBlockPost(post) && post.content.map((block, index) => renderContentBlock(block, index))}
+            {isMarkdownPost(post) && (
+              <div
+                className={styles.markdownContent}
+                dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+              />
+            )}
           </div>
         </article>
       </main>
