@@ -12,6 +12,7 @@ export const projects: Project[] = [
     year: 2024,
     status: 'active',
     heroImage: '/projects/magfinder/hero.svg',
+    previewVideo: '/projects/magfinder/preview.mp4',
     websiteUrl: 'https://magfinder.co',
   },
   {
@@ -24,6 +25,7 @@ export const projects: Project[] = [
     year: 2024,
     status: 'active',
     heroImage: '/projects/text-news/hero.svg',
+    previewVideo: '/projects/text-news/preview.mp4',
   },
 
   // iOS apps
@@ -37,6 +39,7 @@ export const projects: Project[] = [
     year: 2024,
     status: 'active',
     heroImage: '/projects/one-word/hero.svg',
+    previewVideo: '/projects/one-word/preview.mp4',
   },
   {
     id: 'bitcoin-price-ios',
@@ -48,6 +51,7 @@ export const projects: Project[] = [
     year: 2024,
     status: 'active',
     heroImage: '/projects/bitcoin-price-ios/hero.svg',
+    previewVideo: '/projects/bitcoin-price-ios/preview.mp4',
   },
 
   // Mac apps
@@ -61,6 +65,7 @@ export const projects: Project[] = [
     year: 2024,
     status: 'active',
     heroImage: '/projects/bitcoin-price/hero.svg',
+    previewVideo: '/projects/bitcoin-price/preview.mp4',
   },
   {
     id: 'pomo',
@@ -72,6 +77,7 @@ export const projects: Project[] = [
     year: 2024,
     status: 'active',
     heroImage: '/projects/pomo/hero.svg',
+    previewVideo: '/projects/pomo/preview.mp4',
   },
   {
     id: 'to-do',
@@ -83,6 +89,7 @@ export const projects: Project[] = [
     year: 2024,
     status: 'active',
     heroImage: '/projects/to-do/hero.svg',
+    previewVideo: '/projects/to-do/preview.mp4',
   },
   {
     id: 'ui-tracker',
@@ -94,6 +101,19 @@ export const projects: Project[] = [
     year: 2024,
     status: 'beta',
     heroImage: '/projects/ui-tracker/hero.svg',
+    previewVideo: '/projects/ui-tracker/preview.mp4',
+  },
+  {
+    id: 'one-word-mac',
+    name: 'One Word',
+    platform: 'macos',
+    category: 'mac-apps',
+    description: 'Speed read using Rapid Serial Visual Presentation',
+    tech: ['Swift', 'SwiftUI'],
+    year: 2025,
+    status: 'active',
+    heroImage: '/projects/one-word-mac/hero.svg',
+    previewVideo: '/projects/one-word-mac/preview.mp4',
   },
 
   // VisionOS apps
@@ -107,6 +127,7 @@ export const projects: Project[] = [
     year: 2024,
     status: 'active',
     heroImage: '/projects/eye-tracker/hero.svg',
+    previewImage: '/projects/eye-tracker/preview.svg',
   },
 
   // Garmin apps
@@ -120,6 +141,7 @@ export const projects: Project[] = [
     year: 2024,
     status: 'active',
     heroImage: '/projects/watch-face/hero.svg',
+    previewVideo: '/projects/watch-face/preview.mp4',
   },
 ];
 
