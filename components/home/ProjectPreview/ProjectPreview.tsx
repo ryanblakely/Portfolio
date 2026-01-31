@@ -23,7 +23,7 @@ export function ProjectPreview({project}: ProjectPreviewProps) {
       }, 1000);
       const clearProjectTimeout = setTimeout(() => {
         setDisplayedProject(null);
-      }, 1500);
+      }, 1300);
       return () => {
         clearTimeout(fadeTimeout);
         clearTimeout(clearProjectTimeout);
