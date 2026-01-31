@@ -36,10 +36,29 @@ export type PostContentBlock =
   | { type: 'image'; src: string; alt: string; caption?: string }
   | { type: 'code'; content: string; language?: string };
 
-export interface Post {
+interface PostBase {
   slug: string;
   title: string;
   date: string;
   excerpt: string;
+}
+
+export interface BlockPost extends PostBase {
+  format: 'blocks';
   content: PostContentBlock[];
+}
+
+export interface MarkdownPost extends PostBase {
+  format: 'markdown';
+  contentHtml: string;
+}
+
+export type Post = BlockPost | MarkdownPost;
+
+export function isMarkdownPost(post: Post): post is MarkdownPost {
+  return post.format === 'markdown';
+}
+
+export function isBlockPost(post: Post): post is BlockPost {
+  return post.format === 'blocks';
 }

@@ -1,7 +1,8 @@
-import type { Post } from '@/types';
+import type { BlockPost } from '@/types';
 
-export const posts: Post[] = [
+export const posts: BlockPost[] = [
   {
+    format: 'blocks',
     slug: 'hello-world',
     title: 'Hello World',
     date: '2025-01-28',
@@ -16,6 +17,7 @@ I'll be writing about the products I build, the tools I use, and lessons learned
     ],
   },
   {
+    format: 'blocks',
     slug: 'building-this-site',
     title: 'Building This Site',
     date: '2025-01-27',
@@ -38,6 +40,7 @@ I'll be writing about the products I build, the tools I use, and lessons learned
     ],
   },
   {
+    format: 'blocks',
     slug: 'simple-react-hook',
     title: 'A Simple React Hook',
     date: '2025-01-26',

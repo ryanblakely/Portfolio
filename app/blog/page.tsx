@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: 'Thoughts on software development and building products.',
 };
 
-export default function PostsPage() {
-  const posts = getAllPosts();
+export default async function PostsPage() {
+  const posts = await getAllPosts();
 
   return (
     <div className={styles.container}>
