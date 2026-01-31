@@ -92,18 +92,6 @@ export const projects: Project[] = [
     previewVideo: '/projects/to-do/preview.mp4',
   },
   {
-    id: 'ui-tracker',
-    name: 'UI Tracker',
-    platform: 'macos',
-    category: 'mac-apps',
-    description: 'Track UI interactions',
-    tech: ['Swift', 'SwiftUI'],
-    year: 2024,
-    status: 'beta',
-    heroImage: '/projects/ui-tracker/hero.svg',
-    previewVideo: '/projects/ui-tracker/preview.mp4',
-  },
-  {
     id: 'one-word-mac',
     name: 'One Word',
     platform: 'macos',
