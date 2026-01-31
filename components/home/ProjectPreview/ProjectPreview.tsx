@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
+import type {Project} from '@/types';
 import Image from 'next/image';
-import type { Project } from '@/types';
+import {useEffect, useRef, useState} from 'react';
 import styles from './ProjectPreview.module.css';
 
 interface ProjectPreviewProps {
   project: Project | null;
 }
 
-export function ProjectPreview({ project }: ProjectPreviewProps) {
+export function ProjectPreview({project}: ProjectPreviewProps) {
   const [displayedProject, setDisplayedProject] = useState<Project | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const lastChangeRef = useRef<number>(0);
@@ -38,10 +38,13 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
       } else if (project.id !== displayedProject?.id) {
         // New project or slow switch: fade in
         setIsVisible(false);
-        const timeout = setTimeout(() => {
-          setDisplayedProject(project);
-          setIsVisible(true);
-        }, displayedProject ? 100 : 0);
+        const timeout = setTimeout(
+          () => {
+            setDisplayedProject(project);
+            setIsVisible(true);
+          },
+          displayedProject ? 100 : 0,
+        );
         return () => clearTimeout(timeout);
       } else {
         setIsVisible(true);
@@ -49,13 +52,14 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
       lastChangeRef.current = now;
       prevProjectRef.current = project;
     } else {
-      setIsVisible(false);
-      // Keep the project rendered during fade out
-      const timeout = setTimeout(() => {
-        setDisplayedProject(null);
-        prevProjectRef.current = null;
-      }, 500); // Match the CSS transition duration
-      return () => clearTimeout(timeout);
+      // TODO: Temporarily disabled for debugging
+      // setIsVisible(false);
+      // // Keep the project rendered during fade out
+      // const timeout = setTimeout(() => {
+      //   setDisplayedProject(null);
+      //   prevProjectRef.current = null;
+      // }, 500); // Match the CSS transition duration
+      // return () => clearTimeout(timeout);
     }
   }, [project]);
 
@@ -68,27 +72,14 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
   }, [displayedProject]);
 
   return (
-    <div
-      className={`${styles.preview} ${isVisible ? styles.visible : ''}`}
-      aria-live="polite"
-      aria-atomic="true"
-    >
+    <div className={`${styles.preview} ${isVisible ? styles.visible : ''} ${displayedProject?.platform === 'web' ? styles.previewWeb : ''}`} aria-live="polite" aria-atomic="true">
       {displayedProject && (
-        <div className={`${styles.imageContainer} ${!displayedProject.previewVideo ? styles.imageContainerWithBackground : ''}`}>
+        <div
+          className={`${styles.imageContainer} ${!displayedProject.previewVideo ? styles.imageContainerWithBackground : ''}`}
+        >
           {displayedProject.previewVideo ? (
-            <video
-              key={displayedProject.id}
-              ref={videoRef}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className={styles.video}
-            >
-              <source
-                src={displayedProject.previewVideo.replace('.mp4', '.webm')}
-                type="video/webm"
-              />
+            <video key={displayedProject.id} ref={videoRef} autoPlay muted loop playsInline className={styles.video}>
+              <source src={displayedProject.previewVideo.replace('.mp4', '.webm')} type="video/webm" />
               <source src={displayedProject.previewVideo} type="video/mp4" />
             </video>
           ) : (
