@@ -33,6 +33,7 @@
 
 .image {
   border-radius: 8px;
+  filter: grayscale(9%);
 }
 
 .connectLink {
