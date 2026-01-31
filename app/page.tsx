@@ -36,17 +36,14 @@ export default function HomePage() {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <Logo />
-        <div className={styles.headerContent}>
-          <h1 className={styles.name}>{siteConfig.name}</h1>
-          <p className={styles.title}>{siteConfig.title}</p>
-        </div>
-        <Navigation />
-      </header>
-
       <div className={styles.main}>
-        <aside className={styles.sidebar} aria-label="Project categories">
+        <aside className={styles.leftColumn} aria-label="Project categories">
+          <Logo />
+          <div className={styles.identity}>
+            <h1 className={styles.name}>{siteConfig.name}</h1>
+            <p className={styles.title}>{siteConfig.title}</p>
+          </div>
+          <Navigation />
           <nav>
             <ul className={styles.categoryList}>
               {categories.map((category) => {
@@ -75,7 +72,7 @@ export default function HomePage() {
             </ul>
           </nav>
         </aside>
-        <main id="main" className={styles.content}>
+        <main id="main" className={styles.rightColumn}>
           <ProjectPreview project={displayProject} />
         </main>
       </div>
