@@ -1,8 +1,7 @@
 .preview {
   position: relative;
-  height: 100%;
-  padding-top: 40px;
-  box-sizing: border-box;
+  height: 600px;
+  margin-top: 140px;
   opacity: 0;
   transform: scale(0.99);
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -27,7 +26,6 @@
 
 .imageContainerWithBackground {
   min-height: 300px;
-  background-color: var(--color-background-preview);
 }
 
 .image {
