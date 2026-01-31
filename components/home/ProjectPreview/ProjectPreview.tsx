@@ -1,6 +1,6 @@
 import type {Project} from '@/types';
 import Image from 'next/image';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import styles from './ProjectPreview.module.css';
 
 interface ProjectPreviewProps {
@@ -10,10 +10,16 @@ interface ProjectPreviewProps {
 export function ProjectPreview({project}: ProjectPreviewProps) {
   const [displayedProject, setDisplayedProject] = useState<Project | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (project) {
-      // New project: update immediately, CSS animation handles fade-in
+      // If switching projects (not initial), restart animation without unmounting
+      if (displayedProject && displayedProject.id !== project.id && contentRef.current) {
+        contentRef.current.style.animation = 'none';
+        contentRef.current.offsetHeight; // Force reflow
+        contentRef.current.style.animation = '';
+      }
       setDisplayedProject(project);
       setIsVisible(true);
     } else {
@@ -29,22 +35,23 @@ export function ProjectPreview({project}: ProjectPreviewProps) {
         clearTimeout(clearProjectTimeout);
       };
     }
-  }, [project]);
+  }, [project, displayedProject]);
 
   return (
     <div className={`${styles.preview} ${isVisible ? styles.visible : ''} ${displayedProject?.platform === 'web' ? styles.previewWeb : ''}`} aria-live="polite" aria-atomic="true">
       {displayedProject && (
-        <div key={displayedProject.id} className={styles.contentWrapper}>
+        <div ref={contentRef} className={styles.contentWrapper}>
           <div
             className={`${styles.imageContainer} ${!displayedProject.previewVideo ? styles.imageContainerWithBackground : ''}`}
           >
             {displayedProject.previewVideo ? (
-              <video autoPlay muted loop playsInline className={styles.video}>
+              <video key={displayedProject.id} autoPlay muted loop playsInline className={styles.video}>
                 <source src={displayedProject.previewVideo.replace('.mp4', '.webm')} type="video/webm" />
                 <source src={displayedProject.previewVideo} type="video/mp4" />
               </video>
             ) : (
               <Image
+                key={displayedProject.id}
                 src={displayedProject.previewImage || displayedProject.heroImage}
                 alt={`Preview of ${displayedProject.name}`}
                 fill
