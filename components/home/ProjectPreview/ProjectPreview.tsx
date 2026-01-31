@@ -52,14 +52,19 @@ export function ProjectPreview({project}: ProjectPreviewProps) {
       lastChangeRef.current = now;
       prevProjectRef.current = project;
     } else {
-      // TODO: Temporarily disabled for debugging
-      // setIsVisible(false);
-      // // Keep the project rendered during fade out
-      // const timeout = setTimeout(() => {
-      //   setDisplayedProject(null);
-      //   prevProjectRef.current = null;
-      // }, 500); // Match the CSS transition duration
-      // return () => clearTimeout(timeout);
+      // Wait 1s before starting fade out
+      const fadeTimeout = setTimeout(() => {
+        setIsVisible(false);
+      }, 1000);
+      // Keep the project rendered during fade out
+      const clearTimeout_ = setTimeout(() => {
+        setDisplayedProject(null);
+        prevProjectRef.current = null;
+      }, 1500); // 1s delay + 500ms fade duration
+      return () => {
+        clearTimeout(fadeTimeout);
+        clearTimeout(clearTimeout_);
+      };
     }
   }, [project]);
 
