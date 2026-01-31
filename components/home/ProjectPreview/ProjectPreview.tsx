@@ -12,6 +12,7 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
   const [isVisible, setIsVisible] = useState(false);
   const lastChangeRef = useRef<number>(0);
   const prevProjectRef = useRef<Project | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const now = Date.now();
@@ -26,7 +27,12 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             setDisplayedProject(project);
-            setIsVisible(true);
+            // Wait for paint before fading in
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                setIsVisible(true);
+              });
+            });
           });
         });
       } else if (project.id !== displayedProject?.id) {
@@ -53,6 +59,14 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
     }
   }, [project]);
 
+  // Reset and play video when displayedProject changes
+  useEffect(() => {
+    if (videoRef.current && displayedProject?.previewVideo) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {});
+    }
+  }, [displayedProject]);
+
   return (
     <div
       className={`${styles.preview} ${isVisible ? styles.visible : ''}`}
@@ -60,15 +74,33 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
       aria-atomic="true"
     >
       {displayedProject && (
-        <div className={styles.imageContainer}>
-          <Image
-            src={displayedProject.previewImage || displayedProject.heroImage}
-            alt={`Preview of ${displayedProject.name}`}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
-            className={styles.image}
-          />
+        <div className={`${styles.imageContainer} ${!displayedProject.previewVideo ? styles.imageContainerWithBackground : ''}`}>
+          {displayedProject.previewVideo ? (
+            <video
+              key={displayedProject.id}
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className={styles.video}
+            >
+              <source
+                src={displayedProject.previewVideo.replace('.mp4', '.webm')}
+                type="video/webm"
+              />
+              <source src={displayedProject.previewVideo} type="video/mp4" />
+            </video>
+          ) : (
+            <Image
+              src={displayedProject.previewImage || displayedProject.heroImage}
+              alt={`Preview of ${displayedProject.name}`}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+              className={styles.image}
+            />
+          )}
         </div>
       )}
     </div>

@@ -23,6 +23,7 @@ export interface Project {
   status: 'active' | 'beta' | 'archived';
   heroImage: string;
   previewImage?: string;
+  previewVideo?: string;
   galleryImages?: string[];
   websiteUrl?: string;
   appStoreUrl?: string;
