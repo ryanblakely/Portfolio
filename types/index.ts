@@ -31,6 +31,16 @@ export interface Project {
   downloadUrl?: string;
 }
 
+export interface MarkdownProject extends Project {
+  contentHtml: string;
+}
+
+export type AnyProject = Project | MarkdownProject;
+
+export function isMarkdownProject(project: AnyProject): project is MarkdownProject {
+  return 'contentHtml' in project && typeof project.contentHtml === 'string';
+}
+
 export type PostContentBlock =
   | { type: 'text'; content: string }
   | { type: 'image'; src: string; alt: string; caption?: string }

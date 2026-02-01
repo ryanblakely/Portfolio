@@ -6,7 +6,9 @@ import { Logo } from '@/components/layout/Logo';
 import { SoftwareApplicationJsonLd, BreadcrumbJsonLd } from '@/components/seo/JsonLd';
 import { projects } from '@/data/projects';
 import { siteConfig } from '@/data/site';
-import { getProjectByCategoryAndSlug, getCategoryBySlug } from '@/lib/projects';
+import { getCategoryBySlug } from '@/lib/projects';
+import { getProjectByCategoryAndSlugAsync } from '@/lib/projects-server';
+import { isMarkdownProject } from '@/types';
 import styles from './page.module.css';
 
 interface ProjectPageProps {
@@ -22,7 +24,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { category, slug } = await params;
-  const project = getProjectByCategoryAndSlug(category, slug);
+  const project = await getProjectByCategoryAndSlugAsync(category, slug);
 
   if (!project) {
     return { title: 'Not Found' };
@@ -41,7 +43,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { category: categorySlug, slug } = await params;
-  const project = getProjectByCategoryAndSlug(categorySlug, slug);
+  const project = await getProjectByCategoryAndSlugAsync(categorySlug, slug);
   const category = getCategoryBySlug(categorySlug);
 
   if (!project || !category) {
@@ -65,6 +67,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       <main id="main" className={styles.main}>
         <article className={styles.article}>
+          <div className={styles.content}>
+            <h1 className={styles.name}>{project.name}</h1>
+            {isMarkdownProject(project) ? (
+              <div
+                className={styles.markdownContent}
+                dangerouslySetInnerHTML={{ __html: project.contentHtml }}
+              />
+            ) : (
+              <p className={styles.description}>{project.longDescription || project.description}</p>
+            )}
+          </div>
+
           <div className={styles.imageContainer}>
             <Image
               src={project.heroImage}
@@ -76,11 +90,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             />
           </div>
 
-          <div className={styles.content}>
-            <h1 className={styles.name}>{project.name}</h1>
-            <p className={styles.description}>{project.longDescription || project.description}</p>
-
-            <div className={styles.meta}>
+          <div className={styles.meta}>
               <div className={styles.metaItem}>
                 <span className={styles.metaLabel}>Platform</span>
                 <span className={styles.metaValue}>{category.displayName}</span>
@@ -137,7 +147,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </a>
               )}
             </div>
-          </div>
         </article>
 
         <Link href={`/${categorySlug}`} className={styles.backLink}>
