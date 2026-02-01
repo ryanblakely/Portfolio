@@ -1,6 +1,6 @@
-import type { Metadata } from 'next';
-import { Logo } from '@/components/layout/Logo';
-import { siteConfig } from '@/data/site';
+import {Logo} from '@/components/layout/Logo';
+import {siteConfig} from '@/data/site';
+import type {Metadata} from 'next';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 };
 
 const links = [
-  { label: 'Email', href: `mailto:${siteConfig.email}` },
-  { label: 'Twitter', href: siteConfig.twitter },
-  { label: 'Github', href: siteConfig.github },
+  {label: 'Twitter', href: siteConfig.twitter},
+  {label: 'Github', href: siteConfig.github},
+  {label: 'Email', href: `mailto:${siteConfig.email}`},
 ];
 
 export default function ConnectPage() {
@@ -24,7 +24,7 @@ export default function ConnectPage() {
       <main id="main" className={styles.main}>
         <h1 className={styles.heading}>Connect</h1>
         <ul className={styles.list} role="list">
-          {links.map((link) => (
+          {links.map(link => (
             <li key={link.label}>
               <a
                 href={link.href}
