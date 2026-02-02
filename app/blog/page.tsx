@@ -31,6 +31,7 @@ export default async function PostsPage() {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
+                  timeZone: 'UTC',
                 })}
               </time>
             </li>
