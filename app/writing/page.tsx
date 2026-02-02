@@ -5,7 +5,7 @@ import { getAllPosts } from '@/lib/posts';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
-  title: 'Blog',
+  title: 'Writing',
   description: 'Thoughts on software development and building products.',
 };
 
@@ -19,11 +19,11 @@ export default async function PostsPage() {
       </header>
 
       <main id="main" className={styles.main}>
-        <h1 className={styles.heading}>Blog</h1>
+        <h1 className={styles.heading}>Writing</h1>
         <ul className={styles.list} role="list">
           {posts.map((post) => (
             <li key={post.slug} className={styles.item}>
-              <Link href={`/blog/${post.slug}`} className={styles.link}>
+              <Link href={`/writing/${post.slug}`} className={styles.link}>
                 {post.title}
               </Link>
               <time className={styles.date} dateTime={post.date}>
