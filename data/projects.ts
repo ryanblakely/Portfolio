@@ -1,4 +1,4 @@
-import type { Project } from '@/types';
+import type {Project} from '@/types';
 
 export const projects: Project[] = [
   // Web apps
@@ -122,13 +122,13 @@ export const projects: Project[] = [
 ];
 
 export function getProjectsByCategory(categorySlug: string): Project[] {
-  return projects.filter((project) => project.category === categorySlug);
+  return projects.filter(project => project.category === categorySlug);
 }
 
 export function getProjectById(id: string): Project | undefined {
-  return projects.find((project) => project.id === id);
+  return projects.find(project => project.id === id);
 }
 
 export function getProjectsByCategoryWithSlug(categorySlug: string, projectSlug: string): Project | undefined {
-  return projects.find((project) => project.category === categorySlug && project.id === projectSlug);
+  return projects.find(project => project.category === categorySlug && project.id === projectSlug);
 }

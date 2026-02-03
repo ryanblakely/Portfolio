@@ -1,25 +1,39 @@
 ---
-name: "Text-News"
-platform: "web"
-category: "web-apps"
-description: "Minimal, text-based news aggregator with a filter to remove trump."
-tech: ["React", "TypeScript"]
-year: 2024
-status: "active"
-heroImage: "/projects/text-news/hero.svg"
-previewVideo: "/projects/text-news/preview.mp4"
+name: 'Text-News'
+platform: 'web'
+category: 'web-apps'
+description: 'Minimal, text-based news aggregator with a filter to remove trump.'
+tech: [Astro, Netlify Blobs]
+year: 2025
+status: 'active'
+heroImage: '/projects/text-news/hero.svg'
+previewVideo: '/projects/text-news/preview.mp4'
+galleryImages:
+  - /projects/text-news/gallery-1.png
+  - /projects/text-news/gallery-2.png
+  - /projects/text-news/gallery-3.png
 ---
 
-A no-frills news aggregator that strips away the noise and lets you focus on headlines.
+A fast, lightweight news aggregator that strips away the noise and lets you focus on headlines.
 
-## Philosophy
+![Text News homepage](/projects/text-news/text-news-1.png)
 
-News sites are cluttered with ads, autoplaying videos, and attention-grabbing layouts. Text-News takes the opposite approach: just headlines and links, nothing more.
+## Overview
 
-## Features
+News sites are cluttered with ads, autoplaying videos, and attention-grabbing layouts. Text-News is a way to quickly see what is happening without all the noise.
 
-- **Text-Only** - No images, no videos, no distractions
-- **Content Filter** - Optionally filter out topics you'd rather not see
-- **Fast Loading** - Minimal payload means instant page loads
+{{gallery}}
 
-Built with React and TypeScript for a snappy, responsive experience.
+## Why
+
+I wanted a way to view news stories without seeing trump in every headline.
+
+![Text News homepage](/projects/text-news/text-news-2.png)
+
+## How
+
+Text News is a fully server-less, database-free architecture. The backend fetches feeds and results in a Netlify blob that is refreshed every 5 minutes. The frontend uses Astro to render components from Netlify’s edge. The total size of the included javascript is just ~9kb.
+
+![Text News homepage](/projects/text-news/text-news-3.png)
+
+{{tech}}
