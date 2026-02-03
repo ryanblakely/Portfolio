@@ -46,7 +46,6 @@ export function ProjectPreview({project}: ProjectPreviewProps) {
           >
             {displayedProject.previewVideo ? (
               <video key={displayedProject.id} autoPlay muted loop playsInline className={styles.video}>
-                <source src={displayedProject.previewVideo.replace('.mp4', '.webm')} type="video/webm" />
                 <source src={displayedProject.previewVideo} type="video/mp4" />
               </video>
             ) : (
