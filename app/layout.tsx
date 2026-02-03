@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} - ${siteConfig.title}`,
+    default: `${siteConfig.name}, ${siteConfig.title}`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -25,12 +25,12 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} - ${siteConfig.title}`,
+    title: `${siteConfig.name}, ${siteConfig.title}`,
     description: siteConfig.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.name} - ${siteConfig.title}`,
+    title: `${siteConfig.name}, ${siteConfig.title}`,
     description: siteConfig.description,
   },
   robots: {
