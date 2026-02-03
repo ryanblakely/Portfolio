@@ -6,6 +6,7 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypePrismPlus from 'rehype-prism-plus';
+import rehypeRaw from 'rehype-raw';
 import type { MarkdownPost } from '@/types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
@@ -32,9 +33,10 @@ export async function getMarkdownPostBySlug(slug: string): Promise<MarkdownPost 
 
   const processedContent = await unified()
     .use(remarkParse)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
     .use(rehypePrismPlus)
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
 
   const contentHtml = processedContent.toString();

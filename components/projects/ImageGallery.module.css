@@ -1,0 +1,35 @@
+.gallery {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  padding: var(--space-4) 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery::-webkit-scrollbar {
+  height: 8px;
+}
+
+.gallery::-webkit-scrollbar-track {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+.gallery::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 4px;
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.image {
+  border-radius: var(--border-radius);
+  height: auto;
+  width: auto;
+  max-height: 600px;
+  object-fit: contain;
+}
