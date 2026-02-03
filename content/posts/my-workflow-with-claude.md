@@ -1,7 +1,7 @@
 ---
-title: "My Workflow With Claude"
-date: "2026-01-31"
-excerpt: "How I work with Claude to develop applications."
+title: 'My Workflow With Claude'
+date: '2026-01-31'
+excerpt: 'How I work with Claude to develop applications.'
 ---
 
 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) is Anthropic's agentic coding tool. It runs in the terminal and can read files, write code, run commands, search the web, run multiple agents in parallel and more.
@@ -12,7 +12,7 @@ You describe what you want, and Claude figures out how to build it. This works f
 
 I start by asking Claude to interview me about what I want to build. I have an `/interview-me` skill, located in my personal skills directory (~/.claude), that contains a comprehensive set of instructions for this process.
 
-![Claude Code welcome screen](/blog/claude-code-welcome.png)
+![Claude Code welcome screen](/writing/claude-code-welcome.png)
 
 > **Note:** Skills located at `~/.claude` override project-level skills if they share the same name.
 

@@ -1,33 +1,59 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { Logo } from '@/components/layout/Logo';
-import { SoftwareApplicationJsonLd, BreadcrumbJsonLd } from '@/components/seo/JsonLd';
-import { projects } from '@/data/projects';
-import { siteConfig } from '@/data/site';
-import { getCategoryBySlug } from '@/lib/projects';
-import { getProjectByCategoryAndSlugAsync } from '@/lib/projects-server';
-import { isMarkdownProject } from '@/types';
+import {Logo} from '@/components/layout/Logo';
+import {ImageGallery} from '@/components/projects/ImageGallery';
+import {TechTags} from '@/components/projects/TechTags';
+import {BreadcrumbJsonLd, SoftwareApplicationJsonLd} from '@/components/seo/JsonLd';
+import {projects} from '@/data/projects';
+import {siteConfig} from '@/data/site';
+import {getCategoryBySlug} from '@/lib/projects';
+import {getProjectByCategoryAndSlugAsync} from '@/lib/projects-server';
+import {isMarkdownProject, MarkdownProject} from '@/types';
+import type {Metadata} from 'next';
+import {notFound} from 'next/navigation';
 import styles from './page.module.css';
 
+const GALLERY_PLACEHOLDER = '<div data-gallery-placeholder="true"></div>';
+const TECH_PLACEHOLDER = '<div data-tech-placeholder="true"></div>';
+
+function renderMarkdownContent(project: MarkdownProject) {
+  // Split content by all placeholders, keeping track of what each placeholder was
+  const placeholderRegex = /(<div data-(?:gallery|tech)-placeholder="true"><\/div>)/g;
+  const parts = project.contentHtml.split(placeholderRegex);
+
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (part === GALLERY_PLACEHOLDER && project.galleryImages?.length) {
+          return <ImageGallery key={index} images={project.galleryImages} alt={project.name} />;
+        }
+        if (part === TECH_PLACEHOLDER && project.tech?.length) {
+          return <TechTags key={index} tech={project.tech} />;
+        }
+        if (part && !part.startsWith('<div data-')) {
+          return <div key={index} className={styles.markdownContent} dangerouslySetInnerHTML={{__html: part}} />;
+        }
+        return null;
+      })}
+    </>
+  );
+}
+
 interface ProjectPageProps {
-  params: Promise<{ category: string; slug: string }>;
+  params: Promise<{category: string; slug: string}>;
 }
 
 export async function generateStaticParams() {
-  return projects.map((project) => ({
+  return projects.map(project => ({
     category: project.category,
     slug: project.id,
   }));
 }
 
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { category, slug } = await params;
+export async function generateMetadata({params}: ProjectPageProps): Promise<Metadata> {
+  const {category, slug} = await params;
   const project = await getProjectByCategoryAndSlugAsync(category, slug);
 
   if (!project) {
-    return { title: 'Not Found' };
+    return {title: 'Not Found'};
   }
 
   return {
@@ -41,8 +67,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   };
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { category: categorySlug, slug } = await params;
+export default async function ProjectPage({params}: ProjectPageProps) {
+  const {category: categorySlug, slug} = await params;
   const project = await getProjectByCategoryAndSlugAsync(categorySlug, slug);
   const category = getCategoryBySlug(categorySlug);
 
@@ -51,9 +77,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   const breadcrumbs = [
-    { name: 'Home', url: siteConfig.url },
-    { name: category.displayName, url: `${siteConfig.url}/${category.slug}` },
-    { name: project.name, url: `${siteConfig.url}/${category.slug}/${project.id}` },
+    {name: 'Home', url: siteConfig.url},
+    {name: category.displayName, url: `${siteConfig.url}/${category.slug}`},
+    {name: project.name, url: `${siteConfig.url}/${category.slug}/${project.id}`},
   ];
 
   return (
@@ -70,88 +96,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className={styles.content}>
             <h1 className={styles.name}>{project.name}</h1>
             {isMarkdownProject(project) ? (
-              <div
-                className={styles.markdownContent}
-                dangerouslySetInnerHTML={{ __html: project.contentHtml }}
-              />
+              renderMarkdownContent(project)
             ) : (
               <p className={styles.description}>{project.longDescription || project.description}</p>
             )}
           </div>
-
-          <div className={styles.imageContainer}>
-            <Image
-              src={project.heroImage}
-              alt={`${project.name} preview`}
-              fill
-              sizes="(max-width: 768px) 100vw, 600px"
-              priority
-              className={styles.image}
-            />
-          </div>
-
-          <div className={styles.meta}>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Platform</span>
-                <span className={styles.metaValue}>{category.displayName}</span>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Year</span>
-                <span className={styles.metaValue}>{project.year}</span>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Status</span>
-                <span className={styles.metaValue}>{project.status}</span>
-              </div>
-            </div>
-
-            {project.tech.length > 0 && (
-              <div className={styles.tech}>
-                {project.tech.map((tech) => (
-                  <span key={tech} className={styles.techTag}>
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <div className={styles.links}>
-              {project.websiteUrl && (
-                <a
-                  href={project.websiteUrl}
-                  className={styles.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Visit Website
-                </a>
-              )}
-              {project.appStoreUrl && (
-                <a
-                  href={project.appStoreUrl}
-                  className={styles.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  App Store
-                </a>
-              )}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  className={styles.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Source Code
-                </a>
-              )}
-            </div>
         </article>
-
-        <Link href={`/${categorySlug}`} className={styles.backLink}>
-          &larr; Back to {category.displayName}
-        </Link>
       </main>
     </div>
   );

@@ -6,6 +6,7 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypePrismPlus from 'rehype-prism-plus';
+import rehypeRaw from 'rehype-raw';
 import type { MarkdownProject } from '@/types';
 
 const projectsDirectory = path.join(process.cwd(), 'content/projects');
@@ -32,12 +33,16 @@ export async function getProjectMarkdownBySlug(slug: string): Promise<MarkdownPr
 
   const processedContent = await unified()
     .use(remarkParse)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
     .use(rehypePrismPlus)
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
 
-  const contentHtml = processedContent.toString();
+  // Replace placeholders with marker divs
+  const contentHtml = processedContent.toString()
+    .replace(/\{\{gallery\}\}/g, '<div data-gallery-placeholder="true"></div>')
+    .replace(/\{\{tech\}\}/g, '<div data-tech-placeholder="true"></div>');
 
   return {
     id: slug,
