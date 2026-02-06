@@ -18,6 +18,11 @@ export function getAllMarkdownSlugs(): string[] {
   const fileNames = fs.readdirSync(postsDirectory);
   return fileNames
     .filter((fileName) => fileName.endsWith('.md'))
+    .filter((fileName) => {
+      const fullPath = path.join(postsDirectory, fileName);
+      const { data } = matter(fs.readFileSync(fullPath, 'utf8'));
+      return !data.draft;
+    })
     .map((fileName) => fileName.replace(/\.md$/, ''));
 }
 
@@ -30,6 +35,10 @@ export async function getMarkdownPostBySlug(slug: string): Promise<MarkdownPost 
 
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
+
+  if (data.draft) {
+    return undefined;
+  }
 
   const processedContent = await unified()
     .use(remarkParse)
