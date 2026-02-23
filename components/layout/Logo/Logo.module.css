@@ -6,10 +6,11 @@
 }
 
 .logo:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
-.image {
+.avatar {
+  display: block;
   border-radius: 50%;
   object-fit: cover;
 }

@@ -1,14 +1,10 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
+'use client';
+
 import Link from 'next/link';
 import { Logo } from '@/components/layout/Logo';
+import { HalftoneAvatar } from '@/components/layout/Logo/HalftoneAvatar';
 import { siteConfig } from '@/data/site';
 import styles from './page.module.css';
-
-export const metadata: Metadata = {
-  title: 'About',
-  description: siteConfig.description,
-};
 
 export default function AboutPage() {
   return (
@@ -21,12 +17,10 @@ export default function AboutPage() {
         <h1 className={styles.heading}>About</h1>
         <p className={styles.bio}>{siteConfig.description}</p>
         <div className={styles.imageContainer}>
-          <Image
-            src="/about.jpeg"
-            alt="Sunset sky"
-            width={400}
+          <HalftoneAvatar
+            imageSrc="/avatar-halftone.jpg"
+            width={300}
             height={300}
-            className={styles.image}
           />
         </div>
         <Link href="/connect" className={styles.connectLink}>

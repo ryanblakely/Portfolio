@@ -10,7 +10,7 @@ export function Logo() {
         alt="Ryan Blakely"
         width={36}
         height={36}
-        className={styles.image}
+        className={styles.avatar}
         priority
       />
     </Link>

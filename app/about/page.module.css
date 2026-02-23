@@ -28,12 +28,6 @@
 }
 
 .imageContainer {
-  margin-top: var(--space-4);
-}
-
-.image {
-  border-radius: 8px;
-  filter: grayscale(9%);
 }
 
 .connectLink {

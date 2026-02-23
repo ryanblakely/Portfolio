@@ -6,8 +6,7 @@ import { Logo } from '@/components/layout/Logo';
 import { Navigation } from '@/components/layout/Navigation';
 import { ProjectPreview } from '@/components/home/ProjectPreview';
 import { siteConfig } from '@/data/site';
-import { categories } from '@/data/categories';
-import { getProjectsByCategory } from '@/lib/projects';
+import { projects } from '@/data/projects';
 import type { Project } from '@/types';
 import styles from './page.module.css';
 
@@ -33,31 +32,20 @@ export default function HomePage() {
           </div>
           <Navigation />
           <nav>
-            <ul className={styles.categoryList}>
-              {categories.map((category) => {
-                const categoryProjects = getProjectsByCategory(category.slug);
-                return (
-                  <li key={category.slug} className={styles.categoryItem}>
-                    <span className={styles.categoryName}>{category.name}</span>
-                    <span className={styles.projectNames}>
-                      {categoryProjects.map((project, index) => (
-                        <span key={project.id}>
-                          <Link
-                            href={`/${project.category}/${project.id}`}
-                            className={styles.projectLink}
-                            onMouseEnter={() => handleMouseEnter(project)}
-                            onMouseLeave={handleMouseLeave}
-                          >
-                            {project.name}
-                          </Link>
-                          {index < categoryProjects.length - 1 && ', '}
-                        </span>
-                      ))}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
+            <div className={styles.projectList}>
+              {projects.map((project) => (
+                <Link
+                  key={project.id}
+                  href={`/${project.category}/${project.id}`}
+                  className={`${styles.projectCard} ${hoveredProject?.id === project.id ? styles.projectCardActive : ''}`}
+                  onMouseEnter={() => handleMouseEnter(project)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <span className={styles.projectCardName}>{project.name}</span>
+                  <span className={styles.projectCardSubtitle}>{project.year} - {project.description}</span>
+                </Link>
+              ))}
+            </div>
           </nav>
         </aside>
         <main id="main" className={styles.rightColumn}>

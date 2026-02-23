@@ -17,6 +17,17 @@ const nextConfig = {
             rotateStringArray: true,
             stringArray: true,
             stringArrayThreshold: 0.75,
+            reservedStrings: [
+              'precision.*float',
+              'attribute.*',
+              'varying.*',
+              'uniform.*',
+              'void main',
+              'gl_Position',
+              'gl_FragColor',
+              'texture2D',
+              'smoothstep',
+            ],
             deadCodeInjection: false,
             debugProtection: false,
             disableConsoleOutput: true,
@@ -25,7 +36,7 @@ const nextConfig = {
             selfDefending: false,
             unicodeEscapeSequence: false,
           },
-          []
+          ['**/HalftoneAvatar**', '**/TunableShaderCanvas**', '**/shaders/**']
         )
       );
     }
