@@ -42,7 +42,7 @@ export default function HomePage() {
                   onMouseLeave={handleMouseLeave}
                 >
                   <span className={styles.projectCardName}>{project.name}</span>
-                  <span className={styles.projectCardSubtitle}>{project.year} - {project.description}</span>
+                  <span className={styles.projectCardSubtitle}>{project.year} · {project.description}</span>
                 </Link>
               ))}
             </div>
