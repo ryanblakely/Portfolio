@@ -48,6 +48,7 @@
   align-items: flex-start;
   gap: 15px;
   margin-top: var(--space-10);
+  margin-left: -8px;
 }
 
 .projectCard {
@@ -64,11 +65,15 @@
 }
 
 .projectCardName {
-  display: block;
   font-size: 16px;
   font-weight: var(--font-weight-normal);
   color: black;
+  text-decoration: underline;
+  text-decoration-color: #e8e8e8;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--transition-fast);
 }
+
 
 .projectCardSubtitle {
   display: block;
