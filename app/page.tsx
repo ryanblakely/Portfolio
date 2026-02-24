@@ -34,16 +34,16 @@ export default function HomePage() {
           <nav>
             <div className={styles.projectList}>
               {projects.map((project) => (
-                <Link
-                  key={project.id}
-                  href={`/${project.category}/${project.id}`}
-                  className={`${styles.projectCard} ${hoveredProject?.id === project.id ? styles.projectCardActive : ''}`}
-                  onMouseEnter={() => handleMouseEnter(project)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <span className={styles.projectCardName}>{project.name}</span>
-                  <span className={styles.projectCardSubtitle}>{project.year} · {project.description}</span>
-                </Link>
+                  <Link
+                    key={project.id}
+                    href={project.url || `/${project.category}/${project.id}`}
+                    className={`${styles.projectCard} ${hoveredProject?.id === project.id ? styles.projectCardActive : ''}`}
+                    onMouseEnter={() => handleMouseEnter(project)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <span className={styles.projectCardName}>{project.name}</span>
+                    <span className={styles.projectCardSubtitle}>{project.year} · {project.description}</span>
+                  </Link>
               ))}
             </div>
           </nav>

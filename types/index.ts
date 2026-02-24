@@ -24,7 +24,9 @@ export interface Project {
   heroImage: string;
   previewImage?: string;
   previewVideo?: string;
+  logo?: string;
   galleryImages?: string[];
+  url?: string;
   websiteUrl?: string;
   appStoreUrl?: string;
   githubUrl?: string;
