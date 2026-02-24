@@ -2,6 +2,20 @@ import type {Project} from '@/types';
 
 export const projects: Project[] = [
   {
+    id: 'bitcoin-price-ios',
+    name: 'Bitcoin Price',
+    platform: 'ios',
+    category: 'ios-apps',
+    description: 'Real-time price',
+    tech: ['Swift', 'SwiftUI'],
+    year: 2026,
+    status: 'active',
+    logo: '/projects/bitcoin-price-ios/logo.png',
+    heroImage: '/projects/bitcoin-price-ios/hero.svg',
+    previewImage: '/projects/bitcoin-price-ios/preview.png',
+    url: 'https://apps.apple.com/us/app/bitcoin-price-real-time/id6757954719',
+  },
+  {
     id: 'text-news',
     name: 'Text-News',
     platform: 'web',
@@ -27,20 +41,6 @@ export const projects: Project[] = [
     logo: '/projects/one-word/logo.png',
     heroImage: '/projects/one-word/hero.svg',
     previewImage: '/projects/one-word/preview.png',
-  },
-  {
-    id: 'bitcoin-price-ios',
-    name: 'Bitcoin Price',
-    platform: 'ios',
-    category: 'ios-apps',
-    description: 'Real-time price',
-    tech: ['Swift', 'SwiftUI'],
-    year: 2026,
-    status: 'active',
-    logo: '/projects/bitcoin-price-ios/logo.png',
-    heroImage: '/projects/bitcoin-price-ios/hero.svg',
-    previewImage: '/projects/bitcoin-price-ios/preview.png',
-    url: 'https://apps.apple.com/us/app/bitcoin-price-real-time/id6757954719',
   },
   {
     id: 'pomo',
@@ -97,40 +97,4 @@ export const projects: Project[] = [
     url: 'https://magfinder.com',
     websiteUrl: 'https://magfinder.com',
   },
-  // {
-  //   id: 'one-word-mac',
-  //   name: 'Speed Reader',
-  //   platform: 'macos',
-  //   category: 'mac-apps',
-  //   description: 'Speed read using Rapid Serial Visual Presentation',
-  //   tech: ['Swift', 'SwiftUI'],
-  //   year: 2025,
-  //   status: 'active',
-  //   heroImage: '/projects/one-word-mac/hero.svg',
-  //   previewVideo: '/projects/one-word-mac/preview.mp4',
-  // },
-  // {
-  //   id: 'bitcoin-price',
-  //   name: 'Bitcoin Price',
-  //   platform: 'macos',
-  //   category: 'mac-apps',
-  //   description: 'Live BTC price in your menu bar',
-  //   tech: ['Swift', 'SwiftUI', 'WebSocket'],
-  //   year: 2026,
-  //   status: 'active',
-  //   heroImage: '/projects/bitcoin-price/hero.svg',
-  //   previewVideo: '/projects/bitcoin-price/preview.mp4',
-  // },
 ];
-
-export function getProjectsByCategory(categorySlug: string): Project[] {
-  return projects.filter(project => project.category === categorySlug);
-}
-
-export function getProjectById(id: string): Project | undefined {
-  return projects.find(project => project.id === id);
-}
-
-export function getProjectsByCategoryWithSlug(categorySlug: string, projectSlug: string): Project | undefined {
-  return projects.find(project => project.category === categorySlug && project.id === projectSlug);
-}

@@ -17,7 +17,7 @@ export function ProjectPreview({project}: ProjectPreviewProps) {
       // If switching projects (not initial), restart animation without unmounting
       if (displayedProject && displayedProject.id !== project.id && contentRef.current) {
         contentRef.current.style.animation = 'none';
-        contentRef.current.offsetHeight; // Force reflow
+        void contentRef.current.offsetHeight; // Force reflow
         contentRef.current.style.animation = '';
       }
       setDisplayedProject(project);
