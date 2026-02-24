@@ -1,56 +1,5 @@
-export const HALFTONE_VERTEX = `
-precision mediump float;
-
-attribute vec4 a_position;
-attribute vec2 a_texCoord;
-varying vec2 v_texCoord;
-
-uniform float u_mouseActive;
-uniform float u_mouseActivation;
-uniform vec2 u_laggedMouse;
-uniform float u_time;
-
-uniform float u_dispRadius;
-uniform float u_dispStrength;
-uniform float u_timeVarAmp;
-uniform float u_timeVarFreq;
-
-void main() {
-  vec4 position = a_position;
-
-  if (u_mouseActive > 0.5) {
-    vec2 screenPos = position.xy;
-    vec2 mouseScreenPos = vec2(
-      (u_laggedMouse.x - 0.5) * 2.0,
-      (0.5 - u_laggedMouse.y) * 2.0
-    );
-
-    float distanceToMouse = length(screenPos - mouseScreenPos);
-    float displacementRadius = u_dispRadius;
-    float displacementStrength = u_dispStrength;
-
-    float influence = 0.5 / (1.0 + distanceToMouse * distanceToMouse * 2.0);
-    float radiusFalloff = 1.0 - smoothstep(displacementRadius * 0.6, displacementRadius, distanceToMouse);
-
-    float edgeDistanceX = min(abs(screenPos.x), 1.0 - abs(screenPos.x));
-    float edgeDistanceY = min(abs(screenPos.y), 1.0 - abs(screenPos.y));
-    float edgeDistance = min(edgeDistanceX, edgeDistanceY);
-
-    float edgeFalloff = edgeDistance > 0.05 ? smoothstep(0.05, 0.2, edgeDistance) : 0.0;
-
-    influence = influence * displacementStrength * radiusFalloff * edgeFalloff * u_mouseActivation;
-
-    if (influence > 0.001) {
-      vec2 pushDirection = distanceToMouse > 0.01 ? normalize(screenPos - mouseScreenPos) : vec2(0.0);
-      float timeVariation = sin(u_time * u_timeVarFreq + distanceToMouse * 10.0) * u_timeVarAmp + 1.0;
-      position.xy += pushDirection * influence * timeVariation;
-    }
-  }
-
-  gl_Position = position;
-  v_texCoord = a_texCoord;
-}
-`;
+// Re-export the shared vertex shader (identical to PASSTHROUGH_VERTEX)
+export { PASSTHROUGH_VERTEX as HALFTONE_VERTEX } from './cartoon';
 
 export const HALFTONE_FRAGMENT = `
 precision mediump float;

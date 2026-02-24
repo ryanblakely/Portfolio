@@ -7,7 +7,3 @@ export const categories: Category[] = [
   { slug: 'visionos-apps', name: 'VisionOS', displayName: 'VisionOS apps', platform: 'visionos', order: 4 },
   { slug: 'garmin-apps', name: 'Garmin', displayName: 'Garmin apps', platform: 'garmin', order: 5 },
 ];
-
-export function getCategoryBySlug(slug: string): Category | undefined {
-  return categories.find((cat) => cat.slug === slug);
-}

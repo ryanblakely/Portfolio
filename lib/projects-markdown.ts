@@ -11,16 +11,6 @@ import type { MarkdownProject } from '@/types';
 
 const projectsDirectory = path.join(process.cwd(), 'content/projects');
 
-export function getAllProjectMarkdownSlugs(): string[] {
-  if (!fs.existsSync(projectsDirectory)) {
-    return [];
-  }
-  const fileNames = fs.readdirSync(projectsDirectory);
-  return fileNames
-    .filter((fileName) => fileName.endsWith('.md'))
-    .map((fileName) => fileName.replace(/\.md$/, ''));
-}
-
 export async function getProjectMarkdownBySlug(slug: string): Promise<MarkdownProject | undefined> {
   const fullPath = path.join(projectsDirectory, `${slug}.md`);
 
@@ -64,12 +54,4 @@ export async function getProjectMarkdownBySlug(slug: string): Promise<MarkdownPr
     downloadUrl: data.downloadUrl,
     contentHtml,
   };
-}
-
-export async function getAllProjectsFromMarkdown(): Promise<MarkdownProject[]> {
-  const slugs = getAllProjectMarkdownSlugs();
-  const projects = await Promise.all(
-    slugs.map((slug) => getProjectMarkdownBySlug(slug))
-  );
-  return projects.filter((project): project is MarkdownProject => project !== undefined);
 }

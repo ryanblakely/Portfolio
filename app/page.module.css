@@ -38,7 +38,6 @@
   flex: 1;
   min-width: 0;
   padding-top: var(--space-10);
-  /* height: 600px; */
   overflow: hidden;
 }
 
@@ -74,6 +73,11 @@
   transition: text-decoration-color var(--transition-fast);
 }
 
+.projectCardNameInert {
+  font-size: 16px;
+  font-weight: var(--font-weight-normal);
+  color: black;
+}
 
 .projectCardSubtitle {
   display: block;
