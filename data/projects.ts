@@ -79,7 +79,7 @@ export const projects: Project[] = [
     status: 'active',
     logo: '/projects/watch-face/logo.png',
     heroImage: '/projects/watch-face/hero.svg',
-    previewImage: '/projects/watch-face/preview.png',
+    previewImage: '/projects/watch-face/preview.png?v=2',
     url: 'https://apps.garmin.com/apps/e435b71f-a27f-4d54-a815-7b65611864b2',
   },
   {
