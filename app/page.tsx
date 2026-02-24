@@ -33,18 +33,37 @@ export default function HomePage() {
           <Navigation />
           <nav>
             <div className={styles.projectList}>
-              {projects.map((project) => (
+              {projects.map((project) => {
+                const cardClass = `${styles.projectCard} ${hoveredProject?.id === project.id ? styles.projectCardActive : ''}`;
+                const subtitle = `${project.year} · ${project.description}${project.url ? '' : ' · Coming soon'}`;
+                const cardContent = (
+                  <>
+                    <span className={project.url ? styles.projectCardName : styles.projectCardNameInert}>{project.name}</span>
+                    <span className={styles.projectCardSubtitle}>{subtitle}</span>
+                  </>
+                );
+
+                return project.url ? (
                   <Link
                     key={project.id}
-                    href={project.url || `/${project.category}/${project.id}`}
-                    className={`${styles.projectCard} ${hoveredProject?.id === project.id ? styles.projectCardActive : ''}`}
+                    href={project.url}
+                    className={cardClass}
                     onMouseEnter={() => handleMouseEnter(project)}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <span className={styles.projectCardName}>{project.name}</span>
-                    <span className={styles.projectCardSubtitle}>{project.year} · {project.description}</span>
+                    {cardContent}
                   </Link>
-              ))}
+                ) : (
+                  <div
+                    key={project.id}
+                    className={cardClass}
+                    onMouseEnter={() => handleMouseEnter(project)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    {cardContent}
+                  </div>
+                );
+              })}
             </div>
           </nav>
         </aside>
