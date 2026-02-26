@@ -35,7 +35,7 @@ export default function HomePage() {
             <div className={styles.projectList}>
               {projects.map((project) => {
                 const cardClass = `${styles.projectCard} ${hoveredProject?.id === project.id ? styles.projectCardActive : ''}`;
-                const subtitle = `${project.year} · ${project.description}${project.url ? '' : ' · Coming soon'}`;
+                const subtitle = project.description;
                 const cardContent = (
                   <>
                     <span className={project.url ? styles.projectCardName : styles.projectCardNameInert}>{project.name}</span>
