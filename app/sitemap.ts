@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${siteConfig.url}/writing`,
+      url: `${siteConfig.url}/blog`,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const postPages: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${siteConfig.url}/writing/${post.slug}`,
+    url: `${siteConfig.url}/blog/${post.slug}`,
     changeFrequency: 'yearly',
     priority: 0.6,
   }));

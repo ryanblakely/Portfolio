@@ -78,11 +78,11 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
           </nav>
 
           <section className={styles.writingSection}>
-            <h2 className={styles.writingHeading}>Writing</h2>
+            <h2 className={styles.writingHeading}>Blog</h2>
             <ul className={styles.writingList}>
               {posts.map((post) => (
                 <li key={post.slug}>
-                  <Link href={`/writing/${post.slug}`} className={styles.writingLink}>
+                  <Link href={`/blog/${post.slug}`} className={styles.writingLink}>
                     {post.title}
                   </Link>
                 </li>
