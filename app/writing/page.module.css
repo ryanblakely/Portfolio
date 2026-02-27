@@ -1,23 +1,35 @@
 .container {
-  max-width: var(--content-max-width);
+  max-width: 1000px;
   margin: 0 auto;
   padding: var(--page-padding);
   min-height: 100vh;
 }
 
 .header {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-16);
 }
 
 .main {
-  max-width: 600px;
+  max-width: 640px;
+}
+
+.backLink {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.backLink:hover {
+  color: var(--color-text-primary);
 }
 
 .heading {
-  font-size: var(--font-size-base);
+  font-size: 24px;
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  margin: 0 0 var(--space-8) 0;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-10) 0;
 }
 
 .list {
@@ -30,20 +42,19 @@
 .item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 2px;
 }
 
 .link {
   font-size: var(--font-size-base);
   color: var(--color-text-primary);
-  text-decoration: underline;
-  text-decoration-color: #e8e8e8;
-  text-underline-offset: 3px;
-  transition: text-decoration-color var(--transition-fast);
+  text-decoration: none;
 }
 
 .link:hover {
-  text-decoration-color: #b0b0b0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-text-muted);
 }
 
 .date {

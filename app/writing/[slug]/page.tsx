@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Logo } from '@/components/layout/Logo';
 import { CodeBlock } from '@/components/posts/CodeBlock';
 import { getAllSlugs, getPostBySlug } from '@/lib/posts';
 import type { PostContentBlock } from '@/types';
@@ -80,20 +80,22 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <Logo />
+        <Link href="/" className={styles.backLink}>Ryan Blakely</Link>
       </header>
 
       <main id="main" className={styles.main}>
         <article>
-          <h1 className={styles.title}>{post.title}</h1>
-          <time className={styles.date} dateTime={post.date}>
-            {new Date(post.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              timeZone: 'UTC',
-            })}
-          </time>
+          <header className={styles.articleHeader}>
+            <h1 className={styles.title}>{post.title}</h1>
+            <time className={styles.date} dateTime={post.date}>
+              {new Date(post.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                timeZone: 'UTC',
+              })}
+            </time>
+          </header>
           <div className={styles.content}>
             {isBlockPost(post) && post.content.map((block, index) => renderContentBlock(block, index))}
             {isMarkdownPost(post) && (
