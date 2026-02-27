@@ -10,6 +10,7 @@ import rehypeRaw from 'rehype-raw';
 import type { MarkdownPost } from '@/types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
+const isDev = process.env.NODE_ENV === 'development';
 
 export function getAllMarkdownSlugs(): string[] {
   if (!fs.existsSync(postsDirectory)) {
@@ -19,6 +20,7 @@ export function getAllMarkdownSlugs(): string[] {
   return fileNames
     .filter((fileName) => fileName.endsWith('.md'))
     .filter((fileName) => {
+      if (isDev) return true;
       const fullPath = path.join(postsDirectory, fileName);
       const { data } = matter(fs.readFileSync(fullPath, 'utf8'));
       return !data.draft;
@@ -36,7 +38,7 @@ export async function getMarkdownPostBySlug(slug: string): Promise<MarkdownPost 
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  if (data.draft) {
+  if (!isDev && data.draft) {
     return undefined;
   }
 

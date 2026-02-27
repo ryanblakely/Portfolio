@@ -5,15 +5,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ProjectPreview } from '@/components/home/ProjectPreview';
 import { siteConfig } from '@/data/site';
-import { projects } from '@/data/projects';
 import type { Project, Post } from '@/types';
 import styles from '../../app/page.module.css';
 
 interface HomeContentProps {
   posts: Post[];
+  projects: Project[];
 }
 
-export function HomeContent({ posts }: HomeContentProps) {
+export function HomeContent({ posts, projects }: HomeContentProps) {
   const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
 
   const handleMouseEnter = (project: Project) => {
@@ -34,7 +34,7 @@ export function HomeContent({ posts }: HomeContentProps) {
           </header>
 
           <nav className={styles.projectList}>
-            {projects.filter((p) => p.url).map((project) => {
+            {projects.map((project) => {
               const cardClass = `${styles.projectCard} ${hoveredProject?.id === project.id ? styles.projectCardActive : ''}`;
               const cardContent = (
                 <>
