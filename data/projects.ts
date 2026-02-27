@@ -6,7 +6,7 @@ export const projects: Project[] = [
     name: 'Bitcoin Price',
     platform: 'ios',
     category: 'ios-apps',
-    description: 'Millisecond accurate bitcoin price',
+    description: 'Real-time bitcoin price with millisecond accuracy',
     tech: ['Swift', 'SwiftUI'],
     year: 2026,
     status: 'active',
