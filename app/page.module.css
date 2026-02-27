@@ -30,7 +30,7 @@
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
   color: var(--color-text-primary);
-  margin: 6px 0 0 0;
+  margin: var(--space-1) 0 0 0;
 }
 
 .rightColumn {
@@ -45,8 +45,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
-  margin-top: var(--space-12);
+  gap: var(--space-5);
+  margin-top: var(--gap-intro);
   margin-left: -8px;
   max-width: 480px;
 }
@@ -54,8 +54,8 @@
 .projectCard {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px;
+  gap: var(--space-3);
+  padding: var(--space-2);
   border-radius: 14px;
   text-decoration: none;
   transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
@@ -98,7 +98,7 @@
 }
 
 .writingSection {
-  margin-top: 80px;
+  margin-top: var(--gap-section);
 }
 
 .writingHeading {
@@ -129,7 +129,7 @@
 }
 
 .footer {
-  margin-top: 80px;
+  margin-top: var(--gap-footer);
   padding-bottom: var(--space-2);
   font-size: var(--font-size-base);
   color: var(--color-text-primary);
@@ -154,6 +154,18 @@
   .main {
     flex-direction: column;
     gap: var(--space-8);
+  }
+
+  .projectList {
+    margin-top: var(--space-8);
+  }
+
+  .writingSection {
+    margin-top: var(--space-10);
+  }
+
+  .footer {
+    margin-top: var(--space-8);
   }
 
   .rightColumn {
