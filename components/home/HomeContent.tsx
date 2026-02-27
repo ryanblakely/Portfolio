@@ -34,7 +34,7 @@ export function HomeContent({ posts }: HomeContentProps) {
           </header>
 
           <nav className={styles.projectList}>
-            {projects.map((project) => {
+            {projects.filter((p) => p.url).map((project) => {
               const cardClass = `${styles.projectCard} ${hoveredProject?.id === project.id ? styles.projectCardActive : ''}`;
               const cardContent = (
                 <>
