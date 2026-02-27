@@ -17,6 +17,7 @@
 }
 
 .name {
+  font-family: var(--font-inter);
   font-size: 32px;
   font-weight: var(--font-weight-medium);
   color: #a3a3a3;
