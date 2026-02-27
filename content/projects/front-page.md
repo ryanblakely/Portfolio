@@ -9,14 +9,14 @@ status: 'active'
 heroImage: '/projects/front-page/hero.svg'
 previewVideo: '/projects/front-page/preview.mp4'
 galleryImages:
-  - /projects/front-page/gallery-1.png
-  - /projects/front-page/gallery-2.png
-  - /projects/front-page/gallery-3.png
+  - /projects/front-page/gallery-1.webp
+  - /projects/front-page/gallery-2.webp
+  - /projects/front-page/gallery-3.webp
 ---
 
 A fast, lightweight news aggregator that strips away the noise and lets you focus on headlines.
 
-![Text News homepage](/projects/front-page/text-news-1.png)
+![Text News homepage](/projects/front-page/text-news-1.webp)
 
 ## Overview
 
@@ -28,12 +28,12 @@ News sites are cluttered with ads, autoplaying videos, and attention-grabbing la
 
 I wanted a way to view news stories without seeing trump in every headline.
 
-![Text News homepage](/projects/front-page/text-news-2.png)
+![Text News homepage](/projects/front-page/text-news-2.webp)
 
 ## How
 
 Text News is a fully server-less, database-free architecture. The backend fetches feeds and results in a Netlify blob that is refreshed every 5 minutes. The frontend uses Astro to render components from Netlify’s edge. The total size of the included javascript is just ~9kb.
 
-![Text News homepage](/projects/front-page/text-news-3.png)
+![Text News homepage](/projects/front-page/text-news-3.webp)
 
 {{tech}}

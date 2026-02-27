@@ -10,13 +10,13 @@ heroImage: '/projects/magfinder/hero.svg'
 previewVideo: '/projects/magfinder/preview.mp4'
 websiteUrl: 'https://magfinder.co'
 galleryImages:
-  - /projects/magfinder/gallery-1.png
-  - /projects/magfinder/gallery-2.png
-  - /projects/magfinder/gallery-3.png
+  - /projects/magfinder/gallery-1.webp
+  - /projects/magfinder/gallery-2.webp
+  - /projects/magfinder/gallery-3.webp
 ---
 
 A curated newsletter that helps readers discover new independent magazines from around the world.
-![Magfinder header](/projects/magfinder/magfinder-1.png)
+![Magfinder header](/projects/magfinder/magfinder-1.webp)
 
 ## Overview
 
@@ -26,9 +26,9 @@ Users can visit magfinder.com daily to see a stream of new releases and articles
 
 <!-- ![Magfinder newsletter](/projects/magfinder/magfinder-4.jpeg) -->
 
-![Magfinder newsletter](/projects/magfinder/magfinder-5.png)
+![Magfinder newsletter](/projects/magfinder/magfinder-5.webp)
 
-<!-- <img src="/projects/magfinder/magfinder-5.png" width="250" alt="Screenshot" /> -->
+<!-- <img src="/projects/magfinder/magfinder-5.webp" width="250" alt="Screenshot" /> -->
 
 ## Why
 
