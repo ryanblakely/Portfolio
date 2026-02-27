@@ -2,7 +2,7 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: var(--page-padding);
-  min-height: 100vh;
+  padding-bottom: var(--page-padding);
 }
 
 .main {
@@ -44,9 +44,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  gap: 20px;
   margin-top: var(--space-12);
   margin-left: -8px;
+  max-width: 480px;
 }
 
 .projectCard {
@@ -128,7 +129,7 @@
 
 .footer {
   margin-top: 80px;
-  padding-bottom: var(--space-8);
+  padding-bottom: var(--space-2);
   font-size: var(--font-size-base);
   color: var(--color-text-primary);
 }
