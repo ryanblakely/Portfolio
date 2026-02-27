@@ -1,0 +1,121 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.spotlight {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 0;
+  background: #111;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.spotlightImage {
+  position: relative;
+  min-height: 400px;
+}
+
+.image {
+  object-fit: cover;
+  object-position: top;
+}
+
+.spotlightInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px;
+}
+
+.spotlightLogo {
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+.spotlightName {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.spotlightDesc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.thumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 150ms ease, border-color 150ms ease;
+  flex-shrink: 0;
+}
+
+.thumb:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.thumbActive {
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
+
+.thumbActive .thumbName {
+  color: #fff;
+}
+
+.thumbLogo {
+  border-radius: 8px;
+}
+
+.thumbName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 768px) {
+  .spotlight {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .spotlightImage {
+    min-height: 250px;
+  }
+}

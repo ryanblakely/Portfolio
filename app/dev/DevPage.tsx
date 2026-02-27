@@ -3,6 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { projects } from '@/data/projects';
+import { DeviceMockup } from '@/components/DeviceMockup';
+import { BentoGrid } from '@/components/BentoGrid';
+import { AppStoreCards } from '@/components/AppStoreCards';
+import { Showcase } from '@/components/Showcase';
 import styles from './page.module.css';
 
 const ICON_SIZES = [32, 40, 48];
@@ -12,6 +16,10 @@ const TABS = [
   { id: 'fonts', label: 'Fonts' },
   { id: 'headers', label: 'Blog Headers' },
   { id: 'projects', label: 'Project Cards' },
+  { id: 'mockups', label: 'Device Mockups' },
+  { id: 'bento', label: 'Bento Grid' },
+  { id: 'appStore', label: 'App Store' },
+  { id: 'showcase', label: 'Showcase' },
 ] as const;
 
 type TabId = typeof TABS[number]['id'];
@@ -310,6 +318,30 @@ export default function DevPage() {
             </div>
           </section>
         </>
+      )}
+
+      {/* ══ DEVICE MOCKUPS TAB ══ */}
+      {activeTab === 'mockups' && (
+        <div className={styles.mockupGrid}>
+          {projects.map((project) => (
+            <DeviceMockup key={project.id} project={project} />
+          ))}
+        </div>
+      )}
+
+      {/* ══ BENTO GRID TAB ══ */}
+      {activeTab === 'bento' && (
+        <BentoGrid projects={projects} />
+      )}
+
+      {/* ══ APP STORE TAB ══ */}
+      {activeTab === 'appStore' && (
+        <AppStoreCards projects={projects} />
+      )}
+
+      {/* ══ SHOWCASE TAB ══ */}
+      {activeTab === 'showcase' && (
+        <Showcase projects={projects} />
       )}
     </div>
   );

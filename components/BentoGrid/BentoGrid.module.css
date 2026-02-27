@@ -1,0 +1,90 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  grid-auto-flow: dense;
+  gap: 12px;
+}
+
+.card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* iOS apps get tall cards (phone-shaped) */
+.tall {
+  grid-row: span 2;
+}
+
+/* Web / macOS / visionOS get wide cards (landscape) */
+.wide {
+  grid-column: span 2;
+}
+
+/* Garmin stays small (1×1) */
+.small {
+  /* default 1×1 */
+}
+
+.cardImage {
+  object-fit: cover;
+  object-position: top;
+  transition: transform 300ms ease;
+}
+
+.card:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 50%);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.card:hover .cardOverlay {
+  opacity: 1;
+}
+
+.cardInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardLogo {
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.cardName {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.cardDesc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 160px;
+  }
+}
