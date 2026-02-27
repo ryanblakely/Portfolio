@@ -7,7 +7,7 @@ import styles from './Navigation.module.css';
 const navLinks = [
   { href: '/about', label: 'About' },
   { href: '/connect', label: 'Connect' },
-  { href: '/writing', label: 'Writing' },
+  { href: '/blog', label: 'Blog' },
 ];
 
 export function Navigation() {
