@@ -12,7 +12,7 @@ You describe what you want, and Claude figures out how to build it. This works f
 
 I start by asking Claude to interview me about what I want to build. I have an `/interview-me` skill, located in my personal skills directory (~/.claude), that contains a comprehensive set of instructions for this process.
 
-![Claude Code welcome screen](/writing/claude-code-welcome.png)
+![Claude Code welcome screen](/writing/claude-code-welcome.webp)
 
 > **Note:** Skills located at `~/.claude` override project-level skills if they share the same name.
 
