@@ -1,5 +1,5 @@
 .container {
-  max-width: var(--content-max-width);
+  max-width: 1100px;
   margin: 0 auto;
   padding: var(--page-padding);
   min-height: 100vh;
@@ -12,46 +12,46 @@
 }
 
 .leftColumn {
-  width: var(--sidebar-width);
-  flex-shrink: 0;
-}
-
-.identity {
-  margin-top: var(--space-8);
+  flex: 1;
+  min-width: 0;
 }
 
 .name {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
+  font-size: 28px;
+  font-weight: var(--font-weight-medium);
+  color: #b0b0b0;
   margin: 0;
+  line-height: var(--line-height-tight);
 }
 
 .title {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
-  color: var(--color-text-secondary);
-  margin: 0;
+  color: var(--color-text-primary);
+  margin: 4px 0 0 0;
 }
 
 .rightColumn {
-  flex: 1;
-  min-width: 0;
-  padding-top: var(--space-10);
-  overflow: hidden;
+  width: 380px;
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--page-padding);
+  align-self: flex-start;
 }
 
 .projectList {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 15px;
-  margin-top: var(--space-10);
+  gap: 8px;
+  margin-top: var(--space-12);
   margin-left: -8px;
 }
 
 .projectCard {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 8px;
   border-radius: 14px;
   text-decoration: none;
@@ -63,26 +63,79 @@
   box-shadow: 2px 4px 10px rgba(164, 164, 164, 0.25);
 }
 
+.projectCardLogo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.projectCardText {
+  display: flex;
+  flex-direction: column;
+}
+
 .projectCardName {
-  font-size: 16px;
-  font-weight: var(--font-weight-normal);
+  font-size: 15px;
+  font-weight: var(--font-weight-medium);
   color: black;
-  text-decoration: underline;
-  text-decoration-color: #e8e8e8;
-  text-underline-offset: 3px;
-  transition: text-decoration-color var(--transition-fast);
 }
 
 .projectCardNameInert {
-  font-size: 16px;
-  font-weight: var(--font-weight-normal);
+  font-size: 15px;
+  font-weight: var(--font-weight-medium);
   color: black;
 }
 
 .projectCardSubtitle {
-  display: block;
   font-size: 14px;
   color: #7a7a7a;
+  line-height: 1.3;
+}
+
+.writingSection {
+  margin-top: var(--space-16);
+}
+
+.writingHeading {
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.writingList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.writingLink {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.writingLink:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  margin-top: var(--space-16);
+  padding-bottom: var(--space-8);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+}
+
+.footerLink {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footerLink:hover {
+  text-decoration-color: var(--color-text-secondary);
 }
 
 @media (max-width: 768px) {
@@ -93,5 +146,9 @@
   .main {
     flex-direction: column;
     gap: var(--space-8);
+  }
+
+  .rightColumn {
+    display: none;
   }
 }
