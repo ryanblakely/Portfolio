@@ -1,7 +1,7 @@
 .preview {
   position: relative;
   height: 600px;
-  margin-top: 140px;
+  margin-top: 80px;
   opacity: 0;
   transform: scale(0.99);
   transition: opacity 0.3s ease, transform 0.3s ease;
