@@ -1,7 +1,8 @@
 ---
-title: "Good Habits"
-date: "2026-02-02"
+title: “Good Habits”
+date: “2026-02-02”
 excerpt: “Tools to keep my mind and body fresh.”
+draft: true
 ---
 
 A reminder of the habits that help me feel my best.

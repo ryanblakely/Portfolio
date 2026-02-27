@@ -2,7 +2,7 @@
 title: Learning tmux
 date: 2026-02-09
 excerpt: Notes to self as I learn tmux.
-draft: false
+draft: true
 ---
 
 ## Start a tmux session
