@@ -1,0 +1,116 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px;
+}
+
+.pageTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 48px;
+}
+
+.section {
+  margin-bottom: 80px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.variants {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.variant {
+  flex: 1;
+  min-width: 280px;
+  max-width: 420px;
+}
+
+.variantLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+/* Project list container */
+.projectList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ── Card: current two-line layout ── */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 14px;
+}
+
+.logo {
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cardName {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.cardDesc {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* ── Card: inline "Name: description" layout ── */
+.cardInline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 14px;
+}
+
+.cardInlineNoIcon {
+  padding: 6px 8px;
+  border-radius: 14px;
+}
+
+.cardInlineText {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.inlineName {
+  font-weight: 600;
+}
+
+.inlineDesc {
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
