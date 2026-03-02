@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ProjectPreview } from '@/components/home/ProjectPreview';
@@ -15,14 +15,26 @@ interface HomeContentProps {
 
 export function HomeContent({ posts, projects }: HomeContentProps) {
   const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, height: 0, width: 0, opacity: 0 });
+  const cardRefs = useRef<(HTMLAnchorElement | HTMLDivElement | null)[]>([]);
 
-  const handleMouseEnter = (project: Project) => {
+  const handleCardMouseEnter = useCallback((project: Project, index: number) => {
     setHoveredProject(project);
-  };
+    const card = cardRefs.current[index];
+    if (card) {
+      setIndicatorStyle({
+        top: card.offsetTop,
+        height: card.offsetHeight,
+        width: card.offsetWidth,
+        opacity: 1,
+      });
+    }
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleListMouseLeave = useCallback(() => {
     setHoveredProject(null);
-  };
+    setIndicatorStyle(s => ({ ...s, opacity: 0 }));
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -33,9 +45,17 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
             <p className={styles.title}>Software Engineer in Philadelphia</p>
           </header>
 
-          <nav className={styles.projectList}>
-            {projects.map((project) => {
-              const cardClass = `${styles.projectCard} ${hoveredProject?.id === project.id ? styles.projectCardActive : ''}`;
+          <nav className={styles.projectList} onMouseLeave={handleListMouseLeave}>
+            <div
+              className={styles.glassIndicator}
+              style={{
+                transform: `translateY(${indicatorStyle.top}px)`,
+                height: `${indicatorStyle.height}px`,
+                width: `${indicatorStyle.width}px`,
+                opacity: indicatorStyle.opacity,
+              }}
+            />
+            {projects.map((project, index) => {
               const cardContent = (
                 <>
                   {project.logo && (
@@ -58,18 +78,18 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
                 <Link
                   key={project.id}
                   href={project.url}
-                  className={cardClass}
-                  onMouseEnter={() => handleMouseEnter(project)}
-                  onMouseLeave={handleMouseLeave}
+                  ref={el => { cardRefs.current[index] = el; }}
+                  className={styles.projectCard}
+                  onMouseEnter={() => handleCardMouseEnter(project, index)}
                 >
                   {cardContent}
                 </Link>
               ) : (
                 <div
                   key={project.id}
-                  className={cardClass}
-                  onMouseEnter={() => handleMouseEnter(project)}
-                  onMouseLeave={handleMouseLeave}
+                  ref={el => { cardRefs.current[index] = el; }}
+                  className={styles.projectCard}
+                  onMouseEnter={() => handleCardMouseEnter(project, index)}
                 >
                   {cardContent}
                 </div>
