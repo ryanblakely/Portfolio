@@ -60,7 +60,7 @@ export const projects: Project[] = [
     name: 'Magfinder',
     platform: 'web',
     category: 'web-apps',
-    description: 'A weekly art magazine newsletter',
+    description: 'Art magazine newsletter',
     tech: ['Next.js', 'TypeScript', 'Cloudflare'],
     year: 2022,
     status: 'active',
