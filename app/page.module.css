@@ -42,28 +42,48 @@
 }
 
 .projectList {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-5);
   margin-top: var(--gap-intro);
   margin-left: -8px;
   max-width: 480px;
 }
 
-.projectCard {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-2);
+.glassIndicator {
+  position: absolute;
+  left: 0;
+  top: 0;
   border-radius: 14px;
-  text-decoration: none;
-  transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+  pointer-events: none;
+  z-index: 0;
+
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06),
+              inset 0 0.5px 0 rgba(255, 255, 255, 0.5);
+  border: 0.5px solid rgba(0, 0, 0, 0.06);
+
+  transition: transform 380ms cubic-bezier(0.25, 1, 0.5, 1),
+              height 380ms cubic-bezier(0.25, 1, 0.5, 1),
+              width 380ms cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 200ms ease;
+  will-change: transform, height, width;
 }
 
-.projectCardActive {
-  background: white;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+.projectCard {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: var(--space-3);
+  padding: calc(var(--space-2) + var(--space-5) / 2) var(--space-2);
+  border-radius: 14px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .projectCardLogo {
@@ -146,6 +166,13 @@
   text-decoration-color: var(--color-text-primary);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .glassIndicator {
+    transition: opacity 100ms ease;
+    transform: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: var(--space-6);
@@ -158,6 +185,10 @@
 
   .projectList {
     margin-top: var(--space-8);
+  }
+
+  .glassIndicator {
+    display: none;
   }
 
   .writingSection {
