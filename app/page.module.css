@@ -1,6 +1,4 @@
 .container {
-  max-width: 1000px;
-  margin: 0 auto;
   padding: var(--page-padding);
   padding-bottom: var(--page-padding);
 }
@@ -14,6 +12,7 @@
 .leftColumn {
   flex: 1;
   min-width: 0;
+  max-width: 480px;
 }
 
 .name {
