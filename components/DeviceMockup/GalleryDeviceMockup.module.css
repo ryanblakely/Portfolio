@@ -21,6 +21,11 @@
 .ios {
   width: 18vw;
   aspect-ratio: 440 / 920;
+}
+
+.iosScreen {
+  object-fit: cover;
+  object-position: top;
   -webkit-mask-image: url('/images/iphone-mask.svg');
   mask-image: url('/images/iphone-mask.svg');
   -webkit-mask-size: 100% 100%;
@@ -29,28 +34,23 @@
   mask-repeat: no-repeat;
 }
 
-.iosScreen {
-  object-fit: cover;
-  object-position: top;
-}
-
 /* ═══════════════════════════════ */
 /* ── MacBook Pro (SVG overlay)   */
 /* ═══════════════════════════════ */
 .laptop {
   width: 46vw;
   aspect-ratio: 3910 / 2236;
+}
+
+.laptopScreen {
+  object-fit: cover;
+  object-position: top;
   -webkit-mask-image: url('/images/macbook-mask.svg');
   mask-image: url('/images/macbook-mask.svg');
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-}
-
-.laptopScreen {
-  object-fit: cover;
-  object-position: top;
 }
 
 /* ═══════════════════════════════ */
