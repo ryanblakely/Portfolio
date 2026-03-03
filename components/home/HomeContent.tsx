@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ProjectPreview } from '@/components/home/ProjectPreview';
@@ -18,7 +18,9 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
   const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, height: 0, width: 0, opacity: 0 });
+  const [previewRect, setPreviewRect] = useState<{top: number; left: number} | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const mockupRef = useRef<HTMLDivElement | null>(null);
 
   const handleCardMouseEnter = useCallback((project: Project, index: number) => {
     setHoveredProject(project);
@@ -39,6 +41,10 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
   }, []);
 
   const handleCardClick = useCallback((project: Project) => {
+    if (mockupRef.current) {
+      const rect = mockupRef.current.getBoundingClientRect();
+      setPreviewRect({top: rect.top, left: rect.left});
+    }
     setSelectedProject(prev => prev?.id === project.id ? null : project);
   }, []);
 
@@ -120,14 +126,12 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
           </footer>
         </div>
 
-        {!selectedProject && (
-          <main id="main" className={styles.rightColumn}>
-            <ProjectPreview project={hoveredProject} />
-          </main>
-        )}
+        <main id="main" className={styles.rightColumn}>
+          <ProjectPreview project={hoveredProject} mockupRef={mockupRef} />
+        </main>
       </div>
 
-      <ProjectDetailPanel project={selectedProject} onClose={handleClosePanel} />
+      <ProjectDetailPanel project={selectedProject} onClose={handleClosePanel} anchorRect={previewRect} />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import styles from './ProjectDetailPanel.module.css';
 interface ProjectDetailPanelProps {
   project: Project | null;
   onClose: () => void;
+  anchorRect?: {top: number; left: number} | null;
 }
 
 function getCtaLabel(project: Project): string {
@@ -27,7 +28,7 @@ function getGalleryImages(project: Project): string[] {
   return [project.heroImage];
 }
 
-export function ProjectDetailPanel({project, onClose}: ProjectDetailPanelProps) {
+export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetailPanelProps) {
   const [displayedProject, setDisplayedProject] = useState<Project | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -110,7 +111,7 @@ export function ProjectDetailPanel({project, onClose}: ProjectDetailPanelProps) 
           &#x2715;
         </button>
 
-        <div className={styles.content}>
+        <div className={styles.content} style={anchorRect ? {paddingTop: anchorRect.top} : undefined}>
           {hasVideo ? (
             <div className={styles.videoContainer}>
               <video
@@ -126,13 +127,18 @@ export function ProjectDetailPanel({project, onClose}: ProjectDetailPanelProps) 
             <div
               ref={galleryRef}
               className={styles.gallery}
+              style={anchorRect ? {paddingLeft: anchorRect.left - (window.innerWidth * 0.4)} : undefined}
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               onPointerCancel={handlePointerUp}
             >
               {images.map((src, i) => (
-                <div key={src} className={styles.galleryItem}>
+                <div
+                  key={src}
+                  className={`${styles.galleryItem} ${i > 0 && isOpen ? styles.galleryItemAnimated : ''}`}
+                  style={i > 0 ? {'--item-index': i} as React.CSSProperties : undefined}
+                >
                   <GalleryDeviceMockup
                     imageSrc={src}
                     alt={`${displayedProject.name} screenshot ${i + 1}`}
