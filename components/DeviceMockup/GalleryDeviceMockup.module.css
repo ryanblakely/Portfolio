@@ -40,14 +40,17 @@
 .laptop {
   width: 46vw;
   aspect-ratio: 3910 / 2236;
+  -webkit-mask-image: url('/images/macbook-mask.svg');
+  mask-image: url('/images/macbook-mask.svg');
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 .laptopScreen {
   object-fit: cover;
   object-position: top;
-  /* PommePlate SVG: viewBox 3910×2236, screen at (419,95)→(3491,2015) */
-  /* Top: 95/2236=4.25%, Sides: 419/3910=10.72%, Bottom: 221/2236=9.88% */
-  clip-path: inset(4.25% 10.72% 9.88% 10.72% round 1.02% 1.02% 0 0);
 }
 
 /* ═══════════════════════════════ */
