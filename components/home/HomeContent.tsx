@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ProjectPreview } from '@/components/home/ProjectPreview';
+import { ProjectDetailPanel } from '@/components/home/ProjectDetailPanel/ProjectDetailPanel';
 import { siteConfig } from '@/data/site';
 import type { Project, Post } from '@/types';
 import styles from '../../app/page.module.css';
@@ -15,8 +16,9 @@ interface HomeContentProps {
 
 export function HomeContent({ posts, projects }: HomeContentProps) {
   const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, height: 0, width: 0, opacity: 0 });
-  const cardRefs = useRef<(HTMLAnchorElement | HTMLDivElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleCardMouseEnter = useCallback((project: Project, index: number) => {
     setHoveredProject(project);
@@ -34,6 +36,21 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
   const handleListMouseLeave = useCallback(() => {
     setHoveredProject(null);
     setIndicatorStyle(s => ({ ...s, opacity: 0 }));
+  }, []);
+
+  const handleCardClick = useCallback((project: Project) => {
+    setSelectedProject(prev => prev?.id === project.id ? null : project);
+  }, []);
+
+  const handleCardKeyDown = useCallback((e: React.KeyboardEvent, project: Project) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setSelectedProject(project);
+    }
+  }, []);
+
+  const handleClosePanel = useCallback(() => {
+    setSelectedProject(null);
   }, []);
 
   return (
@@ -55,46 +72,32 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
                 opacity: indicatorStyle.opacity,
               }}
             />
-            {projects.map((project, index) => {
-              const cardContent = (
-                <>
-                  {project.logo && (
-                    <Image
-                      src={project.logo}
-                      alt=""
-                      width={40}
-                      height={40}
-                      className={styles.projectCardLogo}
-                    />
-                  )}
-                  <div className={styles.projectCardText}>
-                    <span className={project.url ? styles.projectCardName : styles.projectCardNameInert}>{project.name}</span>
-                    <span className={styles.projectCardSubtitle}>{project.description}</span>
-                  </div>
-                </>
-              );
-
-              return project.url ? (
-                <Link
-                  key={project.id}
-                  href={project.url}
-                  ref={el => { cardRefs.current[index] = el; }}
-                  className={styles.projectCard}
-                  onMouseEnter={() => handleCardMouseEnter(project, index)}
-                >
-                  {cardContent}
-                </Link>
-              ) : (
-                <div
-                  key={project.id}
-                  ref={el => { cardRefs.current[index] = el; }}
-                  className={styles.projectCard}
-                  onMouseEnter={() => handleCardMouseEnter(project, index)}
-                >
-                  {cardContent}
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                ref={el => { cardRefs.current[index] = el; }}
+                role="button"
+                tabIndex={0}
+                className={styles.projectCard}
+                onMouseEnter={() => handleCardMouseEnter(project, index)}
+                onClick={() => handleCardClick(project)}
+                onKeyDown={(e) => handleCardKeyDown(e, project)}
+              >
+                {project.logo && (
+                  <Image
+                    src={project.logo}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className={styles.projectCardLogo}
+                  />
+                )}
+                <div className={styles.projectCardText}>
+                  <span className={styles.projectCardName}>{project.name}</span>
+                  <span className={styles.projectCardSubtitle}>{project.description}</span>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </nav>
 
           <section className={styles.writingSection}>
@@ -117,10 +120,14 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
           </footer>
         </div>
 
-        <main id="main" className={styles.rightColumn}>
-          <ProjectPreview project={hoveredProject} />
-        </main>
+        {!selectedProject && (
+          <main id="main" className={styles.rightColumn}>
+            <ProjectPreview project={hoveredProject} />
+          </main>
+        )}
       </div>
+
+      <ProjectDetailPanel project={selectedProject} onClose={handleClosePanel} />
     </div>
   );
 }

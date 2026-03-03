@@ -13,6 +13,14 @@ export const projects: Project[] = [
     logo: '/projects/bitcoin-price-ios/logo.webp',
     heroImage: '/projects/bitcoin-price-ios/hero.svg',
     previewImage: '/projects/bitcoin-price-ios/preview.webp',
+    galleryImages: [
+      '/projects/bitcoin-price-ios/gallery-1.webp',
+      '/projects/bitcoin-price-ios/gallery-3.webp',
+      '/projects/bitcoin-price-ios/gallery-4.webp',
+      '/projects/bitcoin-price-ios/gallery-5.webp',
+      '/projects/bitcoin-price-ios/gallery-6.webp',
+      '/projects/bitcoin-price-ios/gallery-2.webp',
+    ],
     url: 'https://apps.apple.com/us/app/bitcoin-price-real-time/id6757954719',
   },
   {
@@ -27,6 +35,7 @@ export const projects: Project[] = [
     logo: '/projects/eye-tracker/logo.webp',
     heroImage: '/projects/eye-tracker/hero.svg',
     previewImage: '/projects/eye-tracker/preview.webp',
+    previewVideo: '/projects/eye-trainer/preview.mp4',
   },
   {
     id: 'front-page',
@@ -40,6 +49,16 @@ export const projects: Project[] = [
     logo: '/projects/front-page/logo.webp',
     heroImage: '/projects/front-page/hero.svg',
     previewImage: '/projects/front-page/preview.webp',
+    galleryImages: [
+      '/projects/front-page/gallery-1.webp',
+      '/projects/front-page/gallery-2.webp',
+      '/projects/front-page/gallery-3.webp',
+      '/projects/front-page/gallery-4.webp',
+      '/projects/front-page/gallery-5.webp',
+      '/projects/front-page/gallery-6.webp',
+      '/projects/front-page/gallery-7.webp',
+      '/projects/front-page/gallery-8.webp',
+    ],
   },
   {
     id: 'watch-face',
@@ -67,6 +86,9 @@ export const projects: Project[] = [
     logo: '/projects/magfinder/logo.webp',
     heroImage: '/projects/magfinder/hero.svg',
     previewImage: '/projects/magfinder/preview.webp',
+    galleryImages: [
+      '/projects/magfinder/gallery-1.webp',
+    ],
     url: 'https://magfinder.com',
     websiteUrl: 'https://magfinder.com',
   },

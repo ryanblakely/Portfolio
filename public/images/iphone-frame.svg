@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 920" fill="none">
+  <!-- Device body with transparent screen cutout (compound path, evenodd) -->
+  <path fill-rule="evenodd" clip-rule="evenodd" fill="#1C1C1E" d="
+    M 68,0 H 372 A 68,68 0 0 1 440,68 V 852 A 68,68 0 0 1 372,920 H 68 A 68,68 0 0 1 0,852 V 68 A 68,68 0 0 1 68,0 Z
+    M 68,9 H 372 A 59,59 0 0 1 431,68 V 852 A 59,59 0 0 1 372,911 H 68 A 59,59 0 0 1 9,852 V 68 A 59,59 0 0 1 68,9 Z
+  "/>
+
+  <!-- Side buttons -->
+  <!-- Power button (right) -->
+  <rect x="438" y="200" width="4" height="80" rx="2" fill="#2C2C2E"/>
+  <!-- Volume up (left) -->
+  <rect x="-2" y="170" width="4" height="36" rx="2" fill="#2C2C2E"/>
+  <!-- Volume down (left) -->
+  <rect x="-2" y="220" width="4" height="36" rx="2" fill="#2C2C2E"/>
+  <!-- Action button (left) -->
+  <rect x="-2" y="120" width="4" height="20" rx="2" fill="#2C2C2E"/>
+
+  <!-- Titanium edge highlights -->
+  <rect x="0.5" y="0.5" width="439" height="919" rx="67.5" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
+  <rect x="9.5" y="9.5" width="421" height="901" rx="58.5" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none"/>
+</svg>
