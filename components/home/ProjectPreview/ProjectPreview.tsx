@@ -1,17 +1,18 @@
 import type {Project} from '@/types';
-import {useEffect, useRef, useState, forwardRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {GalleryDeviceMockup} from '@/components/DeviceMockup/GalleryDeviceMockup';
 import styles from './ProjectPreview.module.css';
 
 interface ProjectPreviewProps {
   project: Project | null;
+  mockupRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 function getPreviewImage(project: Project): string {
   return project.galleryImages?.[0] || project.previewImage || project.heroImage;
 }
 
-export function ProjectPreview({project, mockupRef}: ProjectPreviewProps & {mockupRef?: React.RefObject<HTMLDivElement | null>}) {
+export function ProjectPreview({project, mockupRef}: ProjectPreviewProps) {
   const [displayedProject, setDisplayedProject] = useState<Project | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -44,15 +45,17 @@ export function ProjectPreview({project, mockupRef}: ProjectPreviewProps & {mock
       {displayedProject && (
         <div ref={contentRef} className={styles.contentWrapper}>
           {displayedProject.previewVideo ? (
-            <video key={displayedProject.id} autoPlay muted loop playsInline className={styles.video}>
-              <source src={displayedProject.previewVideo} type="video/mp4" />
-            </video>
+            <div ref={mockupRef}>
+              <video key={displayedProject.id} autoPlay muted loop playsInline className={styles.video}>
+                <source src={displayedProject.previewVideo} type="video/mp4" />
+              </video>
+            </div>
           ) : (
             <div ref={mockupRef}>
               <GalleryDeviceMockup
                 imageSrc={getPreviewImage(displayedProject)}
                 alt={`Preview of ${displayedProject.name}`}
-                platform={displayedProject.platform}
+                platform={displayedProject.previewPlatform || displayedProject.platform}
               />
             </div>
           )}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 1180" fill="none">
+  <!-- iPad body with transparent screen cutout (compound path, evenodd) -->
+  <!-- Outer: body rx=28, Inner: screen rx=18, uniform 14px bezel -->
+  <path fill-rule="evenodd" clip-rule="evenodd" fill="#1C1C1E" d="
+    M 28,0 H 792 A 28,28 0 0 1 820,28 V 1152 A 28,28 0 0 1 792,1180 H 28 A 28,28 0 0 1 0,1152 V 28 A 28,28 0 0 1 28,0 Z
+    M 32,14 H 788 A 18,18 0 0 1 806,32 V 1148 A 18,18 0 0 1 788,1166 H 32 A 18,18 0 0 1 14,1148 V 32 A 18,18 0 0 1 32,14 Z
+  "/>
+
+  <!-- Outer edge highlight -->
+  <rect x="0.5" y="0.5" width="819" height="1179" rx="27.5" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
+  <!-- Inner screen edge highlight -->
+  <rect x="14.5" y="14.5" width="791" height="1151" rx="17.5" stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none"/>
+</svg>
