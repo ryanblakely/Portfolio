@@ -111,7 +111,10 @@ export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetail
 
       <div className={styles.content} style={anchorRect ? {paddingTop: anchorRect.top} : undefined}>
         {hasVideo ? (
-          <div className={styles.videoContainer} style={anchorRect ? {width: anchorRect.width} : undefined}>
+          <div
+            className={`${styles.videoContainer} ${isOpen && !isClosing ? styles.videoContainerOpen : ''}`}
+            style={anchorRect ? {'--preview-width': `${anchorRect.width}px`} as React.CSSProperties : undefined}
+          >
             <video
               className={styles.video}
               src={displayedProject.previewVideo}
