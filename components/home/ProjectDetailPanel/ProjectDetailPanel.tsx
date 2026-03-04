@@ -8,18 +8,7 @@ import styles from './ProjectDetailPanel.module.css';
 interface ProjectDetailPanelProps {
   project: Project | null;
   onClose: () => void;
-  anchorRect?: {top: number; left: number} | null;
-}
-
-function getCtaLabel(project: Project): string {
-  if (project.appStoreUrl) return 'View on App Store';
-  if (project.websiteUrl) return 'Visit Website';
-  if (project.url) return 'Open';
-  return '';
-}
-
-function getCtaUrl(project: Project): string {
-  return project.appStoreUrl || project.websiteUrl || project.url || '';
+  anchorRect?: {top: number; left: number; width: number} | null;
 }
 
 function getGalleryImages(project: Project): string[] {
@@ -31,21 +20,27 @@ function getGalleryImages(project: Project): string[] {
 export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetailPanelProps) {
   const [displayedProject, setDisplayedProject] = useState<Project | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const galleryRef = useRef<HTMLDivElement>(null);
   const dragState = useRef<{isDragging: boolean; startX: number; scrollLeft: number}>({isDragging: false, startX: 0, scrollLeft: 0});
 
   useEffect(() => {
     if (project) {
+      setIsClosing(false);
       setDisplayedProject(project);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setIsOpen(true));
       });
-    } else {
+    } else if (displayedProject) {
+      setIsClosing(true);
       setIsOpen(false);
-      const timeout = setTimeout(() => setDisplayedProject(null), 400);
+      const timeout = setTimeout(() => {
+        setDisplayedProject(null);
+        setIsClosing(false);
+      }, 400);
       return () => clearTimeout(timeout);
     }
-  }, [project]);
+  }, [project]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleClose = useCallback(() => {
     onClose();
@@ -69,7 +64,6 @@ export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetail
     }
   }, [isOpen]);
 
-  // Click-and-drag to scroll
   const handlePointerDown = useCallback((e: React.PointerEvent) => {
     const el = galleryRef.current;
     if (!el) return;
@@ -100,65 +94,62 @@ export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetail
   if (!displayedProject) return null;
 
   const images = getGalleryImages(displayedProject);
-  const ctaLabel = getCtaLabel(displayedProject);
-  const ctaUrl = getCtaUrl(displayedProject);
   const hasVideo = !!displayedProject.previewVideo;
 
+  const panelStyle: React.CSSProperties = anchorRect
+    ? {left: anchorRect.left}
+    : {};
+
   return (
-    <>
-      <div className={`${styles.panel} ${isOpen ? styles.panelOpen : ''}`}>
-        <button className={styles.closeButton} onClick={handleClose} aria-label="Close">
-          &#x2715;
-        </button>
+    <div
+      className={`${styles.panel} ${isOpen ? styles.panelOpen : ''}`}
+      style={panelStyle}
+    >
+      <button className={styles.closeButton} onClick={handleClose} aria-label="Close">
+        &#x2715;
+      </button>
 
-        <div className={styles.content} style={anchorRect ? {paddingTop: anchorRect.top} : undefined}>
-          {hasVideo ? (
-            <div className={styles.videoContainer}>
-              <video
-                className={styles.video}
-                src={displayedProject.previewVideo}
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-            </div>
-          ) : (
-            <div
-              ref={galleryRef}
-              className={styles.gallery}
-              style={anchorRect ? {paddingLeft: anchorRect.left - (window.innerWidth * 0.4)} : undefined}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={handlePointerUp}
-              onPointerCancel={handlePointerUp}
-            >
-              {images.map((src, i) => (
-                <div
-                  key={src}
-                  className={`${styles.galleryItem} ${i > 0 && isOpen ? styles.galleryItemAnimated : ''}`}
-                  style={i > 0 ? {'--item-index': i} as React.CSSProperties : undefined}
-                >
-                  <GalleryDeviceMockup
-                    imageSrc={src}
-                    alt={`${displayedProject.name} screenshot ${i + 1}`}
-                    platform={displayedProject.platform}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-
-        </div>
-
-        {ctaLabel && ctaUrl && (
-          <div className={styles.footer}>
-            <a href={ctaUrl} target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
-              {ctaLabel}
-            </a>
+      <div className={styles.content} style={anchorRect ? {paddingTop: anchorRect.top} : undefined}>
+        {hasVideo ? (
+          <div className={styles.videoContainer} style={anchorRect ? {width: anchorRect.width} : undefined}>
+            <video
+              className={styles.video}
+              src={displayedProject.previewVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          </div>
+        ) : (
+          <div
+            ref={galleryRef}
+            className={styles.gallery}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+          >
+            {images.map((src, i) => (
+              <div
+                key={src}
+                className={`${styles.galleryItem} ${
+                  i > 0 && isOpen && !isClosing ? styles.galleryItemEnter : ''
+                } ${
+                  i > 0 && isClosing ? styles.galleryItemExit : ''
+                }`}
+                style={i > 0 ? {'--item-index': i} as React.CSSProperties : undefined}
+              >
+                <GalleryDeviceMockup
+                  imageSrc={src}
+                  alt={`${displayedProject.name} screenshot ${i + 1}`}
+                  platform={displayedProject.previewPlatform || displayedProject.platform}
+                />
+              </div>
+            ))}
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

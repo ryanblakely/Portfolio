@@ -22,7 +22,7 @@ function getDeviceConfig(platform: Platform): DeviceConfig | null {
         containerClass: styles.ios,
         screenClass: styles.iosScreen,
         frameSrc: '/images/iphone-frame.svg',
-        sizes: '(max-width: 768px) 60vw, 18vw',
+        sizes: '(max-width: 768px) 60vw, 36vw',
       };
     case 'macos':
     case 'web':
@@ -31,13 +31,6 @@ function getDeviceConfig(platform: Platform): DeviceConfig | null {
         screenClass: styles.laptopScreen,
         frameSrc: '/images/macbook-frame.svg',
         sizes: '(max-width: 768px) 75vw, 28vw',
-      };
-    case 'garmin':
-      return {
-        containerClass: styles.watch,
-        screenClass: styles.watchScreen,
-        frameSrc: '/images/fenix-frame.svg',
-        sizes: '(max-width: 768px) 50vw, 14vw',
       };
     default:
       return null;
@@ -65,6 +58,19 @@ export function GalleryDeviceMockup({imageSrc, alt, platform}: GalleryDeviceMock
           className={styles.frame}
         />
       </div>
+    );
+  }
+
+  // Garmin — just the image, no frame
+  if (platform === 'garmin') {
+    return (
+      <Image
+        src={imageSrc}
+        alt={alt}
+        width={400}
+        height={400}
+        className={styles.garminImage}
+      />
     );
   }
 

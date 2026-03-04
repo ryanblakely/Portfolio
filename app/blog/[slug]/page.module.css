@@ -2,6 +2,7 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: var(--page-padding);
+  padding-bottom: var(--page-padding);
   min-height: 100vh;
 }
 

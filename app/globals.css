@@ -51,6 +51,7 @@
   --sidebar-width: 280px;
   --content-max-width: 900px;
   --page-padding: var(--space-16);
+  --page-padding-x: 8rem;
   --gap-intro: var(--space-12);
   --gap-section: var(--space-16);
   --gap-footer: var(--space-12);

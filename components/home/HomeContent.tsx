@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback, useMemo } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ProjectPreview } from '@/components/home/ProjectPreview';
@@ -18,7 +18,7 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
   const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, height: 0, width: 0, opacity: 0 });
-  const [previewRect, setPreviewRect] = useState<{top: number; left: number} | null>(null);
+  const [previewRect, setPreviewRect] = useState<{top: number; left: number; width: number} | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mockupRef = useRef<HTMLDivElement | null>(null);
 
@@ -43,7 +43,7 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
   const handleCardClick = useCallback((project: Project) => {
     if (mockupRef.current) {
       const rect = mockupRef.current.getBoundingClientRect();
-      setPreviewRect({top: rect.top, left: rect.left});
+      setPreviewRect({top: rect.top, left: rect.left, width: rect.width});
     }
     setSelectedProject(prev => prev?.id === project.id ? null : project);
   }, []);
@@ -84,7 +84,7 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
                 ref={el => { cardRefs.current[index] = el; }}
                 role="button"
                 tabIndex={0}
-                className={styles.projectCard}
+                className={`${styles.projectCard} ${selectedProject?.id === project.id ? styles.projectCardActive : ''}`}
                 onMouseEnter={() => handleCardMouseEnter(project, index)}
                 onClick={() => handleCardClick(project)}
                 onKeyDown={(e) => handleCardKeyDown(e, project)}
