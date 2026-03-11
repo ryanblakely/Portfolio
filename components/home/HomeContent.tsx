@@ -121,8 +121,6 @@ export function HomeContent({ posts, projects }: HomeContentProps) {
 
           <footer className={styles.footer}>
             <a href={`mailto:${siteConfig.email}`} className={styles.footerLink}>Email</a>
-            {', '}
-            <a href={siteConfig.twitter} className={styles.footerLink}>@goodtyper</a>
           </footer>
         </div>
 
