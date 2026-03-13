@@ -6,6 +6,7 @@ interface GalleryDeviceMockupProps {
   imageSrc: string;
   alt: string;
   platform: Platform;
+  isExpanded?: boolean;
 }
 
 interface DeviceConfig {
@@ -37,7 +38,7 @@ function getDeviceConfig(platform: Platform): DeviceConfig | null {
   }
 }
 
-export function GalleryDeviceMockup({imageSrc, alt, platform}: GalleryDeviceMockupProps) {
+export function GalleryDeviceMockup({imageSrc, alt, platform, isExpanded}: GalleryDeviceMockupProps) {
   const config = getDeviceConfig(platform);
 
   if (config) {
@@ -61,16 +62,18 @@ export function GalleryDeviceMockup({imageSrc, alt, platform}: GalleryDeviceMock
     );
   }
 
-  // Garmin — just the image, no frame
+  // Garmin — vertical photo container with grow effect
   if (platform === 'garmin') {
     return (
-      <Image
-        src={imageSrc}
-        alt={alt}
-        width={400}
-        height={400}
-        className={styles.garminImage}
-      />
+      <div className={`${styles.device} ${styles.photo} ${isExpanded ? styles.photoExpanded : ''}`}>
+        <Image
+          src={imageSrc}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 70vw, 36vw"
+          className={styles.photoScreen}
+        />
+      </div>
     );
   }
 

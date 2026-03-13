@@ -57,11 +57,26 @@
 }
 
 /* ═══════════════════════════════ */
-/* ── Garmin (plain image)        */
+/* ── Photo (vertical container)  */
 /* ═══════════════════════════════ */
-.garminImage {
-  width: 30vw;
-  height: auto;
+.photo {
+  width: 22vw;
+  max-width: 280px;
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  transition: width 380ms cubic-bezier(0.25, 1, 0.5, 1),
+              max-width 380ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.photoExpanded {
+  width: 36vw;
+  max-width: 460px;
+}
+
+.photoScreen {
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
 }
 
 /* ═══════════════════════════════ */
@@ -98,8 +113,13 @@
     width: 75vw;
   }
 
-  .garminImage {
-    width: 50vw;
+  .photo {
+    width: 55vw;
+    max-width: none;
+  }
+
+  .photoExpanded {
+    width: 70vw;
   }
 
   .visionPro {
