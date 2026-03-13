@@ -147,6 +147,7 @@ export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetail
                   imageSrc={src}
                   alt={`${displayedProject.name} screenshot ${i + 1}`}
                   platform={displayedProject.previewPlatform || displayedProject.platform}
+                  isExpanded={isOpen && !isClosing}
                 />
               </div>
             ))}
