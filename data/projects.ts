@@ -78,7 +78,7 @@ export const projects: Project[] = [
   },
   {
     id: 'watch-face',
-    name: 'Watchface',
+    name: 'Garmin Watch Face',
     platform: 'garmin',
     category: 'garmin-apps',
     description: 'Real-time health and environmental data',
