@@ -1,1 +1,0 @@
-export {AppStoreCards} from './AppStoreCards';
