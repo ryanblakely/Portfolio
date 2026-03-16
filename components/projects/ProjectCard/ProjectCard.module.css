@@ -23,6 +23,14 @@
   transition: transform var(--transition-normal);
 }
 
+.link {
+  transition: scale 150ms ease;
+}
+
+.link:active {
+  scale: 0.96;
+}
+
 .link:hover .image {
   transform: scale(1.02);
 }

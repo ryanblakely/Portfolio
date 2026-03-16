@@ -43,6 +43,7 @@
   display: block;
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Body content */
