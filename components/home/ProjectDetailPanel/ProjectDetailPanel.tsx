@@ -94,7 +94,8 @@ export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetail
   if (!displayedProject) return null;
 
   const images = getGalleryImages(displayedProject);
-  const hasVideo = !!displayedProject.previewVideo;
+  const hasGallery = !!displayedProject.galleryImages?.length;
+  const hasVideo = !!displayedProject.previewVideo && !hasGallery;
 
   const panelStyle: React.CSSProperties = anchorRect
     ? {left: anchorRect.left}
