@@ -1,6 +1,6 @@
 import type {Project} from '@/types';
 import {useEffect, useRef, useState} from 'react';
-import {GalleryDeviceMockup} from '@/components/DeviceMockup/GalleryDeviceMockup';
+import {GalleryDeviceMockup} from '@/components/GalleryDeviceMockup/GalleryDeviceMockup';
 import styles from './ProjectPreview.module.css';
 
 interface ProjectPreviewProps {

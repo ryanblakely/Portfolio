@@ -1,7 +1,7 @@
 'use client';
 
 import {useEffect, useState, useCallback, useRef} from 'react';
-import {GalleryDeviceMockup} from '@/components/DeviceMockup/GalleryDeviceMockup';
+import {GalleryDeviceMockup} from '@/components/GalleryDeviceMockup/GalleryDeviceMockup';
 import type {Project} from '@/types';
 import styles from './ProjectDetailPanel.module.css';
 
