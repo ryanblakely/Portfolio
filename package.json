@@ -29,7 +29,6 @@
     "eslint": "^9",
     "eslint-config-next": "^15.1.0",
     "javascript-obfuscator": "^4.1.0",
-    "typescript": "^5",
-    "webpack-obfuscator": "^3.5.1"
+    "typescript": "^5"
   }
 }
