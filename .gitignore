@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Blog posts — only include production-ready posts
+content/posts/*
+!content/posts/process-and-rigor.md
