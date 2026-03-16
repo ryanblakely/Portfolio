@@ -1,12 +1,12 @@
 # Portfolio
 
-Personal portfolio site at [ryanblakely.com](https://ryanblakely.com). Static Next.js app deployed to Cloudflare Pages.
+Static Next.js app deployed to Cloudflare Pages.
 
 ## Tech Stack
 
 - **Next.js 15** with static export (`output: 'export'`)
 - **React 19**, TypeScript
-- **CSS Modules** for all styling — no CSS-in-JS, no Tailwind
+- **CSS Modules** for all styling
 - **Unified/remark/rehype** pipeline for rendering Markdown content
 - **Cloudflare Pages** for hosting
 
