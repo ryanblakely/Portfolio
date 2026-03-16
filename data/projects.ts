@@ -32,7 +32,16 @@ export const projects: Project[] = [
     logo: '/projects/eye-tracker/logo.webp',
     heroImage: '/projects/eye-tracker/hero.svg',
     previewImage: '/projects/eye-tracker/preview.webp',
-    previewVideo: '/projects/eye-trainer/preview.mp4',
+    galleryImages: [
+      '/projects/eye-tracker/gallery-1.webp',
+      '/projects/eye-tracker/gallery-2.webp',
+      '/projects/eye-tracker/gallery-3.webp',
+      '/projects/eye-tracker/gallery-4.webp',
+      '/projects/eye-tracker/gallery-5.webp',
+      '/projects/eye-tracker/gallery-6.webp',
+      '/projects/eye-tracker/gallery-7.webp',
+      '/projects/eye-tracker/gallery-8.webp',
+    ],
   },
   {
     id: 'magfinder',

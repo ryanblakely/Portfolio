@@ -79,7 +79,7 @@ export function GalleryDeviceMockup({imageSrc, alt, platform, isExpanded}: Galle
 
   // Fallback for platforms without SVG frames (visionOS, etc.)
   return (
-    <div className={`${styles.device} ${styles.visionPro}`}>
+    <div className={`${styles.device} ${styles.visionPro} ${isExpanded ? styles.visionProExpanded : ''}`}>
       <div className={styles.screen}>
         <Image
           src={imageSrc}
