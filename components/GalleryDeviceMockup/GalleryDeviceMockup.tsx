@@ -1,6 +1,14 @@
+'use client';
+
+import {useRef, useState, useCallback} from 'react';
+import {createPortal} from 'react-dom';
 import Image from 'next/image';
 import type {Platform} from '@/types';
 import styles from './GalleryDeviceMockup.module.css';
+
+function isVideo(src: string) {
+  return /\.(mp4|webm|mov)(\?|$)/i.test(src);
+}
 
 interface GalleryDeviceMockupProps {
   imageSrc: string;
@@ -64,6 +72,15 @@ export function GalleryDeviceMockup({imageSrc, alt, platform, isExpanded}: Galle
 
   // Garmin — vertical photo container with grow effect
   if (platform === 'garmin') {
+    if (isVideo(imageSrc)) {
+      return (
+        <GarminVideo
+          src={imageSrc}
+          poster={imageSrc.replace(/\.[^.]+$/, '-poster.webp')}
+          isExpanded={isExpanded}
+        />
+      );
+    }
     return (
       <div className={`${styles.device} ${styles.photo} ${isExpanded ? styles.photoExpanded : ''}`}>
         <Image
@@ -90,5 +107,88 @@ export function GalleryDeviceMockup({imageSrc, alt, platform, isExpanded}: Galle
         />
       </div>
     </div>
+  );
+}
+
+function GarminVideo({src, poster, isExpanded}: {src: string; poster: string; isExpanded?: boolean}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const thumbRef = useRef<HTMLDivElement>(null);
+  const [stage, setStage] = useState<'idle' | 'open' | 'closing'>('idle');
+
+  const handleOpen = useCallback(() => {
+    if (stage !== 'idle') return;
+    setStage('open');
+    // Play after the transition starts
+    requestAnimationFrame(() => {
+      videoRef.current?.play();
+    });
+  }, [stage]);
+
+  const handleClose = useCallback(() => {
+    if (stage !== 'open') return;
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    setStage('closing');
+    setTimeout(() => setStage('idle'), 350);
+  }, [stage]);
+
+  const handleEnded = useCallback(() => {
+    handleClose();
+  }, [handleClose]);
+
+  return (
+    <>
+      {/* Thumbnail in gallery */}
+      <div
+        ref={thumbRef}
+        className={`${styles.device} ${styles.photo} ${isExpanded ? styles.photoExpanded : ''} ${styles.videoGarmin}`}
+        onClick={handleOpen}
+        onPointerDown={e => e.stopPropagation()}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={poster} alt="" className={styles.photoScreen} />
+        <div className={styles.playOverlay}>
+          <svg viewBox="0 0 48 48" className={styles.playIcon}>
+            <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.5)" />
+            <polygon points="19.5,14 19.5,34 35,24" fill="#fff" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Fullscreen player — portaled to body to escape transforms */}
+      {stage !== 'idle' && createPortal(
+        <div
+          className={`${styles.videoBackdrop} ${stage === 'open' ? styles.videoBackdropVisible : ''}`}
+          onClick={handleClose}
+          onPointerDown={e => e.stopPropagation()}
+        >
+          <button
+            className={styles.videoCloseButton}
+            onClick={handleClose}
+            aria-label="Close video"
+          >
+            &#x2715;
+          </button>
+          <div
+            className={`${styles.videoPlayer} ${stage === 'open' ? styles.videoPlayerVisible : ''}`}
+            onClick={e => e.stopPropagation()}
+          >
+            <video
+              ref={videoRef}
+              src={src}
+              poster={poster}
+              muted
+              playsInline
+              onEnded={handleEnded}
+              className={styles.videoPlayerMedia}
+            />
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 }
