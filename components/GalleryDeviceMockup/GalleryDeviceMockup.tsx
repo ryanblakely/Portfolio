@@ -150,12 +150,12 @@ function GarminVideo({src, poster, isExpanded}: {src: string; poster: string; is
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={poster} alt="" className={styles.photoScreen} />
-        <div className={styles.playOverlay}>
+        {isExpanded && <div className={styles.playOverlay}>
           <svg viewBox="0 0 48 48" className={styles.playIcon}>
             <circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.5)" />
             <polygon points="19.5,14 19.5,34 35,24" fill="#fff" />
           </svg>
-        </div>
+        </div>}
       </div>
 
       {/* Fullscreen player — portaled to body to escape transforms */}

@@ -97,7 +97,7 @@ export const projects: Project[] = [
     logo: '/projects/watch-face/logo.webp',
     heroImage: '/projects/watch-face/hero.svg',
     previewImage: '/projects/watch-face/preview.webp?v=2',
-    galleryImages: ['/projects/watch-face/gallery-1.webp', '/projects/watch-face/gallery-video.mp4'],
+    galleryImages: ['/projects/watch-face/gallery-video.mp4', '/projects/watch-face/gallery-1.webp'],
     url: 'https://apps.garmin.com/apps/e435b71f-a27f-4d54-a815-7b65611864b2',
   },
   {
