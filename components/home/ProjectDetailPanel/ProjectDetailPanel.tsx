@@ -2,7 +2,8 @@
 
 import {useEffect, useState, useCallback, useRef} from 'react';
 import {GalleryDeviceMockup} from '@/components/GalleryDeviceMockup/GalleryDeviceMockup';
-import type {Project} from '@/types';
+import type {GalleryImage, Project} from '@/types';
+import {normalizeGalleryImage} from '@/types';
 import styles from './ProjectDetailPanel.module.css';
 
 interface ProjectDetailPanelProps {
@@ -11,10 +12,10 @@ interface ProjectDetailPanelProps {
   anchorRect?: {top: number; left: number; width: number} | null;
 }
 
-function getGalleryImages(project: Project): string[] {
-  if (project.galleryImages?.length) return project.galleryImages;
-  if (project.previewImage) return [project.previewImage];
-  return [project.heroImage];
+function getGalleryImages(project: Project): GalleryImage[] {
+  if (project.galleryImages?.length) return project.galleryImages.map(normalizeGalleryImage);
+  if (project.previewImage) return [{ src: project.previewImage }];
+  return [{ src: project.heroImage }];
 }
 
 export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetailPanelProps) {
@@ -134,9 +135,9 @@ export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetail
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerUp}
           >
-            {images.map((src, i) => (
+            {images.map((img, i) => (
               <div
-                key={src}
+                key={img.src}
                 className={`${styles.galleryItem} ${
                   i > 0 && isOpen && !isClosing ? styles.galleryItemEnter : ''
                 } ${
@@ -145,9 +146,9 @@ export function ProjectDetailPanel({project, onClose, anchorRect}: ProjectDetail
                 style={i > 0 ? {'--item-index': i} as React.CSSProperties : undefined}
               >
                 <GalleryDeviceMockup
-                  imageSrc={src}
+                  imageSrc={img.src}
                   alt={`${displayedProject.name} screenshot ${i + 1}`}
-                  platform={displayedProject.previewPlatform || displayedProject.platform}
+                  platform={img.platform || displayedProject.previewPlatform || displayedProject.platform}
                   isExpanded={isOpen && !isClosing}
                 />
               </div>

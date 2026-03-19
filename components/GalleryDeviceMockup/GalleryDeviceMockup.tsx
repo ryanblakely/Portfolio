@@ -3,7 +3,7 @@
 import {useRef, useState, useCallback} from 'react';
 import {createPortal} from 'react-dom';
 import Image from 'next/image';
-import type {Platform} from '@/types';
+import type {GalleryPlatform, Platform} from '@/types';
 import styles from './GalleryDeviceMockup.module.css';
 
 function isVideo(src: string) {
@@ -13,7 +13,7 @@ function isVideo(src: string) {
 interface GalleryDeviceMockupProps {
   imageSrc: string;
   alt: string;
-  platform: Platform;
+  platform: GalleryPlatform;
   isExpanded?: boolean;
 }
 
@@ -47,6 +47,20 @@ function getDeviceConfig(platform: Platform): DeviceConfig | null {
 }
 
 export function GalleryDeviceMockup({imageSrc, alt, platform, isExpanded}: GalleryDeviceMockupProps) {
+  if (platform === 'frameless') {
+    return (
+      <div className={styles.frameless}>
+        <Image
+          src={imageSrc}
+          alt={alt}
+          width={864}
+          height={926}
+          className={styles.framelessImage}
+        />
+      </div>
+    );
+  }
+
   const config = getDeviceConfig(platform);
 
   if (config) {

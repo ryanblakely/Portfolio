@@ -1,4 +1,5 @@
 import type {Project} from '@/types';
+import {normalizeGalleryImage} from '@/types';
 import {useEffect, useRef, useState} from 'react';
 import {GalleryDeviceMockup} from '@/components/GalleryDeviceMockup/GalleryDeviceMockup';
 import styles from './ProjectPreview.module.css';
@@ -9,7 +10,9 @@ interface ProjectPreviewProps {
 }
 
 function getPreviewImage(project: Project): string {
-  return project.galleryImages?.[0] || project.previewImage || project.heroImage;
+  const first = project.galleryImages?.[0];
+  if (first) return normalizeGalleryImage(first).src;
+  return project.previewImage || project.heroImage;
 }
 
 export function ProjectPreview({project, mockupRef}: ProjectPreviewProps) {

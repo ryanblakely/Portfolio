@@ -1,5 +1,13 @@
 export type Platform = 'web' | 'ios' | 'macos' | 'visionos' | 'garmin';
 
+export type GalleryPlatform = Platform | 'frameless';
+
+export type GalleryImage = { src: string; platform?: GalleryPlatform };
+
+export function normalizeGalleryImage(img: string | GalleryImage): GalleryImage {
+  return typeof img === 'string' ? { src: img } : img;
+}
+
 export type CategorySlug = 'web-apps' | 'ios-apps' | 'mac-apps' | 'visionos-apps' | 'garmin-apps';
 
 export interface Category {
@@ -26,7 +34,7 @@ export interface Project {
   previewVideo?: string;
   previewPlatform?: Platform;
   logo?: string;
-  galleryImages?: string[];
+  galleryImages?: (string | GalleryImage)[];
   url?: string;
   websiteUrl?: string;
   appStoreUrl?: string;

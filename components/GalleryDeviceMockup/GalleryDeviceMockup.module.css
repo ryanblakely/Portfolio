@@ -185,6 +185,22 @@
 }
 
 /* ═══════════════════════════════ */
+/* ── Frameless (popover shots)   */
+/* ═══════════════════════════════ */
+.frameless {
+  height: min(38vw, 460px);
+  display: flex;
+  align-items: center;
+}
+
+.framelessImage {
+  height: 100%;
+  width: auto;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+/* ═══════════════════════════════ */
 /* ── Vision Pro (visionOS)       */
 /* ═══════════════════════════════ */
 .visionPro {
@@ -230,6 +246,10 @@
 
   .photoExpanded {
     width: 70vw;
+  }
+
+  .frameless {
+    height: 60vw;
   }
 
   .visionPro {
